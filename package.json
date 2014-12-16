@@ -1,8 +1,17 @@
 {
   "name": "abstract-object",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
+  "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
+  "files": [
+    "README.md",
+    "LICENSE-MIT",
+    "index.js",
+    "RefObject.js",
+    "test",
+    "lib"
+  ],
   "scripts": {
     "test": "grunt test"
   },
@@ -39,13 +48,15 @@
     "url": "https://github.com/snowyu/abstract-object"
   },
   "keywords": [
-    "nosql",
-    "graph",
-    "knowledge",
-    "database",
-    "AI",
-    "experter",
-    "inference"
+    "abstract",
+    "object",
+    "class",
+    "model",
+    "prototype",
+    "event",
+    "reference",
+    "addref",
+    "refcount"
   ],
   "author": {
     "name": "Riceball LEE",
