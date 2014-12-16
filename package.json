@@ -1,0 +1,63 @@
+{
+  "name": "abstract-object",
+  "version": "1.0.0",
+  "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
+  "main": "./index",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "coffee-script": "^1.8.0",
+    "connect-livereload": "*",
+    "grunt": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-mocha-test": "^0.12.4",
+    "grunt-newer": "*",
+    "grunt-release": "*",
+    "grunt-rev": "*",
+    "grunt-saucelabs": "*",
+    "grunt-usemin": "*",
+    "mocha": "^2.0.1",
+    "powerbuild": "*",
+    "sinon": "^1.11.1",
+    "sinon-chai": "^2.6.0",
+    "source-map-support": "*"
+  },
+  "engines": {
+    "node": "^0.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snowyu/abstract-object"
+  },
+  "keywords": [
+    "nosql",
+    "graph",
+    "knowledge",
+    "database",
+    "AI",
+    "experter",
+    "inference"
+  ],
+  "author": {
+    "name": "Riceball LEE",
+    "email": "snowyu.lee@gmail.com"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/snowyu/abstract-object/blob/master/LICENSE-MIT"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/snowyu/abstract-object/issues"
+  }
+}
