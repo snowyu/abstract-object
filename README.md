@@ -1,8 +1,8 @@
 # AbtractObject
 
-[![Build Status](https://secure.travis-ci.org/snowyu/abtract-object.png?branch=master)](http://travis-ci.org/snowyu/abtract-object)
+[![Build Status](https://secure.travis-ci.org/snowyu/abstract-object.png?branch=master)](http://travis-ci.org/snowyu/abstract-object)
 
-[![NPM](https://nodei.co/npm/abstract-objectabstract-object.png?stars&downloads&downloadRank)](https://nodei.co/npm/abstract-object/) [![NPM](https://nodei.co/npm-dl/abstract-object.png?months=6&height=3)](https://nodei.co/npm/abstract-object/)
+[![NPM](https://nodei.co/npm/abstract-object.png?stars&downloads&downloadRank)](https://nodei.co/npm/abstract-object/) [![NPM](https://nodei.co/npm-dl/abstract-object.png?months=6&height=3)](https://nodei.co/npm/abstract-object/)
 
 AbstractObject with Object State Events Supports and `free` method provides.
 
