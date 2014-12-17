@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
@@ -9,6 +9,8 @@
     "LICENSE-MIT",
     "index.js",
     "RefObject.js",
+    "util.js",
+    "Error.js",
     "test",
     "lib"
   ],
