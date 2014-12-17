@@ -43,13 +43,13 @@ describe "inherits", ->
     "a1Method"
 
 
-  Root = ->
+  Root = (@inited="Root", @other)->
     "Root"
 
   Root::className = "Root"
   Root::rootMethod = ->
 
-  B = ->
+  B = (@inited="B")->
     "B"
 
   B::className = "B"
@@ -59,13 +59,13 @@ describe "inherits", ->
 
   A::aMethod = aMethod
   A::className = "A"
-  A1 = ->
+  A1 = (@inited="A1")->
     "A1"
 
   A1::a1Method = a1Method
   A1::className = "A1"
 
-  it "inherits and isInheritedFrom", ->
+  it "test inherits and isInheritedFrom", ->
     assert.equal util.inherits(A, Root), true
     assert.equal util.inherits(A, Root), false
     assert.equal util.inherits(B, Root), true
@@ -81,8 +81,9 @@ describe "inherits", ->
     assert.equal util.isInheritedFrom(A1, Root), true
     assert.equal util.isInheritedFrom(A1, A), true
     assert.equal util.isInheritedFrom(A1, B), false, "A1 is not inherited from B"
+    assert.equal util.isInheritedFrom(A, B), false, "A is not inherited from B"
 
-  it "inheritsObject", ->
+  it "test inheritsObject", ->
     cMethod = ->
       "cMethod"
     C = ->
@@ -102,4 +103,25 @@ describe "inherits", ->
     assert.equal bProto.cMethod, cMethod
     assert.equal bProto.constructor, C
     assert.equal bProto, C::
+
+  describe "createObject", ->
+    createObject = util.createObject
+
+    it 'should call the parent\'s constructor method if it no constructor', ->
+      A12 = ->
+      assert.equal inherits(A12, A1), true
+      a = createObject(A12)
+      assert.equal a.inited, "A1"
+
+    it 'should call the root\'s constructor method if its parent no constructor yet', ->
+      A2 = ->
+      assert.equal inherits(A2, A), true
+      a = createObject(A2)
+      assert.equal a.inited, "Root"
+    it 'should pass the correct arguments to constructor', ->
+      class A2
+      assert.equal inherits(A2, A), true
+      a = createObject(A2, "hiFirst", 1881)
+      assert.equal a.inited, "hiFirst"
+      assert.equal a.other, 1881
 

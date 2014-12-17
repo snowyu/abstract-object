@@ -64,19 +64,5 @@ module.exports = class AbstractObject
     @changeObjectState OBJECT_STATES.destroyed
   free: ->
     @destroy()
-  @create: (aClass)->
-    result = util.createObjectApply(aClass, arguments)
-    if aClass isnt aClass::constructor
-      aClass::constructor.apply(result, Array.prototype.slice.call(arguments, 1))
-      # Note aClass = undefined if remove the first argument
-      #ctor = aClass::constructor
-      #Array.prototype.splice.call(arguments, 0, 1)
-      #ctor.apply(result, arguments)
-    ###
-    if util.isEmptyFunction(aClass::constructor)
-      ctor = util.getConstructor(aClass.super_)
-      Array.prototype.splice.call(arguments, 0, 1)
-      ctor.apply(result, arguments)# if ctor
-    ###
-    result
+  @create: util.createObject
 

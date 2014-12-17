@@ -150,27 +150,34 @@ var util = module.exports = {
     newPrototype: function(aClass, aConstructor) {
       //Object.create(prototype) only for ES5
       //Object.create(prototype, initProps) only for ES6
-      //For Browser:
+      //For Browser not support ES5/6:
       //  var Object = function() { this.constructor = aConstructor; };
       //  Object.prototype = aClass.prototype;
       //  return new Object();
       var ctor = util.isEmptyFunction(aConstructor) ? util.getConstructor(aClass) : aConstructor;
-      var result = Object.create(aClass.prototype, {
-        constructor: {
-          value: ctor,
-          enumerable: false,
-          writable: true,
-          configurable: true
-        }
-      });
+      var result;
+      if (Object.create) { //typeof Object.create === 'function'
+        result = Object.create(aClass.prototype, {
+          constructor: {
+            value: ctor,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }
+        });
+      } else {
+        var Obj = function obj() {this.constructor = ctor};
+        Obj.prototype = aClass.prototype;
+        result = new Obj();
+      }
       util._extend(result, aConstructor.prototype);
       return result;
     },
     createObject: function(aClass) {
-      return new (Function.prototype.bind.apply(aClass, arguments));
-    },
-    createObjectApply: function(aClass, aArguments) {
-      return new (Function.prototype.bind.apply(aClass, aArguments));
+      var result = new (Function.prototype.bind.apply(aClass, arguments));
+      if (aClass !== aClass.prototype.constructor)
+        aClass.prototype.constructor.apply(result, Array.prototype.slice.call(arguments, 1));
+      return result;
     },
     createObjectOld: function(aClass, aArguments) {
       function F() {
@@ -205,8 +212,7 @@ var util = module.exports = {
       }
       return result;
     },
-    //get non-empty constructor function:
-    //if all parent constructor are empty return null.
+    //get latest non-empty constructor function through inherits link:
     getConstructor: function(ctor) {
       var result = ctor;
       var isEmpty = util.isEmptyFunction(result);

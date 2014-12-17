@@ -9,7 +9,7 @@ AbstractObject with Object State Events Supports and `free` method provides.
 The derived class should overwrite the `init`, `final` methods.
 
 * Methods:
-  * `create`(class): the `create` class method uses to create a new object instance.
+  * `create`(class): the `create` class method uses to create a new object instance(the util.createObject is the same function).
     * class: the class constructor to create a new instance.
     * ...: the left arguments will be passed into the class constructor.
   * `init`: abstract initialization method after a new instance creating.
@@ -41,13 +41,14 @@ The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddR
 AbstractObject = require('abstract-object')
 RefObject = require('abstract-object/RefObject')
 inherits = require('abstract-object/lib/util').inherits
+createObject = AbstractObject.createObject
 
 class MyObject
   inherits MyObject, RefObject
   init: (@a,@b)->
     super()
 
-myObj = AbstractObject.create(MyObject, 1, 2)
+myObj = createObject(MyObject, 1, 2)
 
 # if you do not wanna use `AbstractObject.create`, you MUST remember this:
 # even the constructor is empty, you should can the parent's constructor manually.
@@ -71,8 +72,9 @@ the javascript:
 var AbstractObject = require('abstract-object')
 var RefObject = require('abstract-object/RefObject')
 var util = require('abstract-object/lib/util')
+var createObject = AbstractObject.createObject
 
-//if you do not wanna to use the 'AbstractObject.create':
+//if you do not wanna to use the 'AbstractObject.create'(createObject):
 var MyObject = function() {
   //super call
   MyObject.__super__.constructor.apply(this, arguments);
@@ -92,7 +94,9 @@ MyObject.prototype.init = function(a,b) {
 }
 
 
-var myObj = AbstractObject.create(MyObject, 1, 2)
+var myObj = createObject(MyObject, 1, 2)
+//or this,  must overwrite the constructor and call the super constructor.
+var myObj = new MyObject(1,2)
 ```
 
 
