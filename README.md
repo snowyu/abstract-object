@@ -11,7 +11,7 @@ The derived class should overwrite the `init`, `final` methods.
 * Methods:
   * `create`(class): the `create` class method uses to create a new object instance.
     * class: the class constructor to create a new instance.
-    * ...: the left arguments will be passed into the constructor.
+    * ...: the left arguments will be passed into the class constructor.
   * `init`: abstract initialization method after a new instance creating.
     * the constructor's arguments should be passed into init method.
   * `final`: abstract finalization method before the instance destroying.
@@ -51,15 +51,16 @@ myObj = AbstractObject.create(MyObject, 1, 2)
 
 # if you do not wanna use `AbstractObject.create`, you MUST remember this:
 # even the constructor is empty, you should can the parent's constructor manually.
+# myObj = new MyObject()
 
 class MyObject
   inherits MyObject, RefObject
   constructor: ->
+    # must call super method here:
     super
   init: (@a,@b)->
+    # must call super method here for RefObject initialization:
     super()
-
-
 
 ```
 
