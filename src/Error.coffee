@@ -40,8 +40,26 @@ errors =
   InvalidType: kInvalidType
   InvalidFormat: kInvalidFormat
 
+module.exports.createError = createError = (aType, aErrorCode)->
+  AbstractError[aType] = aErrorCode
+  AbstractError["is" + aType] = ((aErrorCode, aType) ->
+    (err) ->
+      err.code is aErrorCode or (not err.code? and err.message and err.message.substring(0, aType.length) is aType)
+  )(aErrorCode, aType)
+  AbstractError::[firstLower(aType)] = ((aIsMethodName) ->
+    ->
+      AbstractError[aIsMethodName] this
+  )("is" + aType)
+  return class Err
+    inherits Err, AbstractError
+    constructor: (msg)->
+      msg = aType if not msg? or msg is ""
+      AbstractError.call this, msg, aErrorCode
+
 for k of errors
-  # the error code
+  Err = createError(k, errors[k])
+  module.exports[k + "Error"] = Err if errors[k] > 0
+  ### the error code
   AbstractError[k] = errors[k]
   
   #generate AbstractError.isNotFound(err) class methods:
@@ -65,4 +83,4 @@ for k of errors
     
     #generate NotFoundError,... Classes
     module.exports[k + "Error"] = Err
-
+  ###

@@ -38,4 +38,13 @@ describe "test AbstractErrors", ->
     err = new Errors.InvalidArgumentError()
     assert.equal err.message, "InvalidArgument"
 
+describe "test extend AbstractError", ->
+  createError = Errors.createError
+  it "should add a new Error class", ->
+    ErrCls = createError("MyError", 1000)
+    err = new ErrCls("already read over error.")
+    assert.ok AbstractError.isMyError(err)
+    assert.ok err.myError()
+    assert.equal err.message, "already read over error."
+    assert.equal err.code, 1000
 
