@@ -19,15 +19,15 @@ module.exports.NotImplementedError = class NotImplementedError
   constructor: ->
     AbstractError.call this, "NotImplemented", kNotSupported
 
-kOk = 0
-kNotFound = 1
-kCorruption = 2
-kNotSupported = 3
-kInvalidArgument = 4
-kIOError = 5
-kNotOpened = 101
-kInvalidType = 102
-kInvalidFormat = 103
+kOk             = 0
+kNotFound       = 1
+kCorruption     = 2
+kNotSupported   = 3
+kInvalidArgument= 4
+kIOError        = 5
+kNotOpened      = 6
+kInvalidType    = 7
+kInvalidFormat  = 8
 
 errors =
   Ok: kOk
