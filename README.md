@@ -9,13 +9,20 @@ AbstractObject with Object State Events Supports and `free` method provides.
 The derived class should overwrite the `init`, `final` methods.
 
 * Methods:
-  * `create`(class): the `create` class method uses to create a new object instance(the util.createObject is the same function).
-    * class: the class constructor to create a new instance.
-    * ...: the left arguments will be passed into the class constructor.
-  * `init`: abstract initialization method after a new instance creating.
-    * the constructor's arguments should be passed into init method.
+  * `create`(class, ...): the `create` class method uses to create a new object instance(the util.createObject is the same function).
+    * `class`: the class constructor to create a new instance.
+    * `...`: the left arguments will be passed into the class constructor.
+  * `init(...)`: abstract initialization method after a new instance creating.
+    * `...`: the constructor's arguments should be passed into init method.
   * `final`: abstract finalization method before the instance destroying.
   * `free`: free the class instance.
+  * `dispatch`(event, args[, callback]): dispath an event or callback
+    * `event`: the event name
+    * `args`: the args are passed to event or callback
+    * `callback`: optional, it will not dispatch event if the callback is exists, unless the callback return false.
+  * `dispatchError`(error[, callback]):
+    * `error`: the error instance.
+    * `callback`: optional, it will not dispatch `'error'` event if the callback is exists, unless the callback return false.
 
 * Events:
   * `'initing'`: emit before the init method

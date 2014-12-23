@@ -2,6 +2,9 @@ EventEmitter  = require("events").EventEmitter
 util          = require("./util")
 
 inherits      = util.inherits
+isArray       = util.isArray
+isFunction    = util.isFunction
+isUndefined   = util.isUndefined
 
 
 # AbstractObject with Object State Events Supports.
@@ -64,5 +67,18 @@ module.exports = class AbstractObject
     @changeObjectState OBJECT_STATES.destroyed
   free: ->
     @destroy()
+  # dispatch(event, args[, callback])
+  dispatch: (event, args, callback) ->
+    if isUndefined(callback) and isFunction(args)
+      callback = args
+      args = []
+    else if not isArray(args)
+      args = [args]
+    return if callback and callback.apply(this, args) isnt false
+    args.splice(0, 0, event)
+    @emit.apply this, args
+  dispatchError: (error, callback)->
+    return if callback and callback(error) isnt false
+    @emit('error', error)
   @create: util.createObject
 
