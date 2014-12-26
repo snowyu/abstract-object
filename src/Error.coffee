@@ -40,21 +40,23 @@ errors =
   InvalidType: kInvalidType
   InvalidFormat: kInvalidFormat
 
-module.exports.createError = createError = (aType, aErrorCode)->
-  AbstractError[aType] = aErrorCode
-  AbstractError["is" + aType] = ((aErrorCode, aType) ->
+module.exports.createError = createError = (aType, aErrorCode, ErrorClass=AbstractError)->
+  ErrorClass[aType] = aErrorCode
+  ErrorClass["is" + aType] = ((aErrorCode, aType) ->
     (err) ->
       err.code is aErrorCode or (not err.code? and err.message and err.message.substring(0, aType.length) is aType)
   )(aErrorCode, aType)
-  AbstractError::[firstLower(aType)] = ((aIsMethodName) ->
+  ErrorClass::[firstLower(aType)] = ((aIsMethodName, ErrorClass) ->
     ->
-      AbstractError[aIsMethodName] this
-  )("is" + aType)
+      ErrorClass[aIsMethodName] this
+  )("is" + aType, ErrorClass)
+
   return class Err
-    inherits Err, AbstractError
-    constructor: (msg)->
+    inherits Err, ErrorClass
+    constructor: (msg, aCode=aErrorCode)->
       msg = aType if not msg? or msg is ""
-      AbstractError.call this, msg, aErrorCode
+      super msg, aCode
+  
 
 for k of errors
   Err = createError(k, errors[k])
