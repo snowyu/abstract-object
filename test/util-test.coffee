@@ -112,6 +112,9 @@ describe "inherits", ->
       assert.equal inherits(A12, A1), true
       a = createObject(A12)
       assert.instanceOf a, A12
+      assert.instanceOf a, A1
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.inited, "A1"
 
     it 'should call the root\'s constructor method if its parent no constructor yet', ->
@@ -119,12 +122,16 @@ describe "inherits", ->
       assert.equal inherits(A2, A), true
       a = createObject(A2)
       assert.instanceOf a, A2
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.inited, "Root"
     it 'should pass the correct arguments to init', ->
       class A2
       assert.equal inherits(A2, A), true
       a = createObject(A2, "hiFirst", 1881)
       assert.instanceOf a, A2
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.inited, "hiFirst"
       assert.equal a.other, 1881
     it 'should pass the correct arguments to constructor', ->
@@ -132,11 +139,12 @@ describe "inherits", ->
       assert.equal inherits(A2, A), true
       a = createObject(A2, "hiFirst", 1881)
       assert.instanceOf a, A2
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.first, "hiFirst"
       assert.equal a.second, 1881
       should.not.exist a.inited
       should.not.exist a.other
-
 
   describe "createObjectWith", ->
     createObject = util.createObjectWith
@@ -146,6 +154,9 @@ describe "inherits", ->
       assert.equal inherits(A12, A1), true
       a = createObject(A12)
       assert.instanceOf a, A12
+      assert.instanceOf a, A1
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.inited, "A1"
 
     it 'should call the root\'s constructor method if its parent no constructor yet', ->
@@ -153,12 +164,16 @@ describe "inherits", ->
       assert.equal inherits(A2, A), true
       a = createObject(A2)
       assert.instanceOf a, A2
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.inited, "Root"
     it 'should pass the correct arguments to init', ->
       class A2
       assert.equal inherits(A2, A), true
       a = createObject(A2, ["hiFirst", 1881])
       assert.instanceOf a, A2
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.inited, "hiFirst"
       assert.equal a.other, 1881
     it 'should pass the correct arguments to constructor', ->
@@ -167,8 +182,24 @@ describe "inherits", ->
       assert.equal inherits(A2, A), true
       a = createObject(A2, ["hiFirst", 1881])
       assert.instanceOf a, A2
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
       assert.equal a.first, "hiFirst"
       assert.equal a.second, 1881
       should.not.exist a.inited
       should.not.exist a.other
+    it 'should pass the correct arguments to init for internal arguments', ->
+      class A2
+        constructor: ->
+          if not (this instanceof A2)
+            return createObject(A2, arguments)
+          super
+      assert.equal inherits(A2, A), true
+      a = A2("hiFirst~", 1181)
+      assert.instanceOf a, A2
+      assert.instanceOf a, A
+      assert.instanceOf a, Root
+      assert.equal a.inited, "hiFirst~"
+      assert.equal a.other, 1181
+
 
