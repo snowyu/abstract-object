@@ -81,5 +81,5 @@ module.exports = class AbstractObject
     return if callback and callback(error) isnt false
     @emit('error', error)
   @create: util.createObject
-  @createWith: util.createWith
+  @createWith: util.createObjectWith
 

@@ -61,6 +61,24 @@ describe "AbstractObject", ->
             arguments.should.have.property '2', 456
             done()
         obj = AbstractObject.create(TestObject, 'abc', '321', 456)
+      it 'should pass the correct arguments to init', ->
+        class TestObject
+          inherits TestObject, AbstractObject
+        class A2
+          inherits A2, TestObject
+          constructor: ->
+            if not (this instanceof A2)
+              return AbstractObject.createWith(A2, arguments)
+            super
+          init:(@first, @second, @third)->
+            arguments.should.have.length(3)
+            arguments.should.have.property '0', 'abc'
+            arguments.should.have.property '1', '321'
+            arguments.should.have.property '2', 456
+        obj = A2('abc', '321', 456)
+        obj.should.have.property 'first', 'abc'
+        obj.should.have.property 'second', '321'
+        obj.should.have.property 'third', 456
     describe ".dispatchError", ->
       NotFoundError = Errors.NotFoundError
       err = new NotFoundError('FallingError')

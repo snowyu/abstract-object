@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
