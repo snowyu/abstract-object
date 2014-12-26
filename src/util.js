@@ -173,6 +173,15 @@ var util = module.exports = {
       util._extend(result, aConstructor.prototype);
       return result;
     },
+    createObjectWith: function(aClass, aArguments) {
+      args = [aClass];
+      if (aArguments)
+        args = args.concat(aArguments);
+      var result = new (Function.prototype.bind.apply(aClass, args));
+      if (aClass !== aClass.prototype.constructor)
+        aClass.prototype.constructor.apply(result, aArguments);
+      return result;
+    },
     createObject: function(aClass) {
       var result = new (Function.prototype.bind.apply(aClass, arguments));
       if (aClass !== aClass.prototype.constructor)

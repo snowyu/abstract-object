@@ -111,17 +111,64 @@ describe "inherits", ->
       A12 = ->
       assert.equal inherits(A12, A1), true
       a = createObject(A12)
+      assert.instanceOf a, A12
       assert.equal a.inited, "A1"
 
     it 'should call the root\'s constructor method if its parent no constructor yet', ->
       A2 = ->
       assert.equal inherits(A2, A), true
       a = createObject(A2)
+      assert.instanceOf a, A2
       assert.equal a.inited, "Root"
-    it 'should pass the correct arguments to constructor', ->
+    it 'should pass the correct arguments to init', ->
       class A2
       assert.equal inherits(A2, A), true
       a = createObject(A2, "hiFirst", 1881)
+      assert.instanceOf a, A2
       assert.equal a.inited, "hiFirst"
       assert.equal a.other, 1881
+    it 'should pass the correct arguments to constructor', ->
+      A2 = (@first, @second)->
+      assert.equal inherits(A2, A), true
+      a = createObject(A2, "hiFirst", 1881)
+      assert.instanceOf a, A2
+      assert.equal a.first, "hiFirst"
+      assert.equal a.second, 1881
+      should.not.exist a.inited
+      should.not.exist a.other
+
+
+  describe "createObjectWith", ->
+    createObject = util.createObjectWith
+
+    it 'should call the parent\'s constructor method if it no constructor', ->
+      class A12
+      assert.equal inherits(A12, A1), true
+      a = createObject(A12)
+      assert.instanceOf a, A12
+      assert.equal a.inited, "A1"
+
+    it 'should call the root\'s constructor method if its parent no constructor yet', ->
+      class A2
+      assert.equal inherits(A2, A), true
+      a = createObject(A2)
+      assert.instanceOf a, A2
+      assert.equal a.inited, "Root"
+    it 'should pass the correct arguments to init', ->
+      class A2
+      assert.equal inherits(A2, A), true
+      a = createObject(A2, ["hiFirst", 1881])
+      assert.instanceOf a, A2
+      assert.equal a.inited, "hiFirst"
+      assert.equal a.other, 1881
+    it 'should pass the correct arguments to constructor', ->
+      class A2
+        constructor: (@first, @second)->
+      assert.equal inherits(A2, A), true
+      a = createObject(A2, ["hiFirst", 1881])
+      assert.instanceOf a, A2
+      assert.equal a.first, "hiFirst"
+      assert.equal a.second, 1881
+      should.not.exist a.inited
+      should.not.exist a.other
 
