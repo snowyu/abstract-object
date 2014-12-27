@@ -20,6 +20,7 @@ describe "test AbstractErrors", ->
 
   it "test AbstractError Classes",  ->
     err = new Errors.NotFoundError()
+    assert.equal err.name, "NotFoundError"
     assert.ok AbstractError.isNotFound(err), "should be notFound"
     assert.ok err.notFound(), "should be notFound"
     assert.notOk AbstractError.isOk(err), "should not be ok"
@@ -53,6 +54,7 @@ describe "test extend AbstractError", ->
     Error1 = createError("Error1", 12, MyError)
     err = new Error1("already read over error.")
     assert.instanceOf err, MyError
+    assert.equal err.name, "Error1Error"
     assert.equal err.message, "already read over error."
     assert.equal err.code, 12
     assert.ok MyError.isError1(err), "MyError.isError1"

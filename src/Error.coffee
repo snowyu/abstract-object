@@ -53,7 +53,10 @@ module.exports.createError = createError = (aType, aErrorCode, ErrorClass=Abstra
 
   return class Err
     inherits Err, ErrorClass
-    constructor: (msg, aCode=aErrorCode)->
+    name: aType + 'Error'
+    constructor: (msg, aCode)->
+      if typeof aCode isnt 'number'
+        aCode = aErrorCode
       msg = aType if not msg? or msg is ""
       super msg, aCode
   
