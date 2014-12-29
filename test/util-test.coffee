@@ -1,8 +1,12 @@
 chai            = require 'chai'
+sinon           = require 'sinon'
+sinonChai       = require 'sinon-chai'
 assert          = chai.assert
 should          = chai.should()
 
 util            = require "../lib/util"
+
+chai.use(sinonChai)
 
 describe "isEmpty", ->
   isEmpty = util.isEmpty
@@ -202,4 +206,79 @@ describe "inherits", ->
       assert.equal a.inited, "hiFirst~"
       assert.equal a.other, 1181
 
+describe "inject", ->
+  inject = util.inject
+  it "should inject a function before execution", ->
+    run = (a,b,c)->[a,b,c]
+    onBefore = sinon.spy()
+    run = inject(run, onBefore)
+    run(1,"b",3).should.be.deep.equal [1,"b",3]
+    onBefore.should.have.been.calledWith(1,"b",3)
+    onBefore.should.have.been.calledOnce
+
+  it "should inject a function before execution and change the arguments", ->
+    runOrg = sinon.spy (a,b,c)->[a,b,c]
+    onBefore = sinon.spy (a,b,c)->a=2;b="B";c=4;arguments
+    run = inject(runOrg, onBefore)
+    run(1,"b",3).should.be.deep.equal [2,"B", 4]
+    onBefore.should.have.been.calledWith(1,"b",3)
+    onBefore.should.have.been.calledOnce
+    runOrg.should.have.been.calledOnce
+
+  it "should inject a function before execution and deny the original function execution", ->
+    runOrg = sinon.spy (a,b,c)->[a,b,c]
+    onBefore = sinon.spy ->false
+    run = inject(runOrg, onBefore)
+    run(1,"b",3).should.be.false
+    onBefore.should.have.been.calledWith(1,"b",3)
+    onBefore.should.have.been.calledOnce
+    runOrg.should.have.not.been.called
+
+  it "should inject a function after execution", ->
+    runOrg = sinon.spy (a,b,c)->[a,b,c]
+    onAfter = sinon.spy (a,b,c, result, isDenied)->
+      a.should.be.equal 1
+      b.should.be.equal "b" 
+      c.should.be.equal 3
+      result.should.be.deep.equal [1,"b",3]
+      isDenied.should.be.false
+      return
+    run = inject(runOrg, null, onAfter)
+    run(1,"b",3).should.be.deep.equal [1,"b",3]
+    onAfter.should.have.been.calledWith(1,"b",3)
+    onAfter.should.have.been.calledOnce
+    runOrg.should.have.been.calledOnce
+
+  it "should inject a function after execution and change result", ->
+    runOrg = sinon.spy (a,b,c)->[a,b,c]
+    onAfter = sinon.spy (a,b,c, result, isDenied)->
+      a.should.be.equal 1
+      b.should.be.equal "b" 
+      c.should.be.equal 3
+      result.should.be.deep.equal [1,"b",3]
+      isDenied.should.be.false
+      [1,2,3]
+    run = inject(runOrg, null, onAfter)
+    run(1,"b",3).should.be.deep.equal [1,2,3]
+    onAfter.should.have.been.calledWith(1,"b",3)
+    onAfter.should.have.been.calledOnce
+    runOrg.should.have.been.calledOnce
+
+  it "should inject a function before and after execution", ->
+    runOrg = sinon.spy (a,b,c)->[a,b,c]
+    onBefore = sinon.spy()
+    onAfter = sinon.spy (a,b,c, result, isDenied)->
+      a.should.be.equal 1
+      b.should.be.equal "b" 
+      c.should.be.equal 3
+      result.should.be.deep.equal [1,"b",3]
+      isDenied.should.be.false
+      return
+    run = inject(runOrg, onBefore, onAfter)
+    run(1,"b",3).should.be.deep.equal [1,"b",3]
+    onBefore.should.have.been.calledWith(1,"b",3)
+    onBefore.should.have.been.calledOnce
+    onAfter.should.have.been.calledWith(1,"b",3)
+    onAfter.should.have.been.calledOnce
+    runOrg.should.have.been.calledOnce
 
