@@ -61,7 +61,7 @@ class MyObject
 myObj = createObject(MyObject, 1, 2)
 
 # if you do not wanna use `AbstractObject.create`, you MUST remember this:
-# even the constructor is empty, you should can the parent's constructor manually.
+# even the constructor is empty, you should call the parent's constructor manually.
 # myObj = new MyObject()
 
 class MyObject
@@ -157,12 +157,13 @@ the error codes:
 
 use the `createError` function can extend the AbstractError.
 
-createError(typeName, errorCode)
+createError(typeName, errorCode[, parentErrorClass])
 
 __arguments__
 
 * typeName *(string)*: the error type name, the first character must be upper case.
 * errorCode: *(number)*: the error code, it should be greater than 1000.
+* parentErrorClass: *(class)*:  the optional parent error class. defaults to AbstractError.
 
 __return__
 
