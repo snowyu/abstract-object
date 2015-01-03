@@ -98,7 +98,12 @@ var util = module.exports = {
       */
       return result;
     },
-
+    //just replace the ctor.super to superCtor,
+    inheritsDirectly: function(ctor, superCtor) {
+      ctor.super_ = superCtor;
+      ctor.__super__ = superCtor.prototype; //for coffeeScirpt super keyword.
+      ctor.prototype = util.newPrototype(superCtor, ctor);      
+    },
     /**
      * Inherit the prototype methods from one constructor into another.
      *
@@ -145,6 +150,7 @@ var util = module.exports = {
         checkeds.push(ctor);
         result = ctor.super_ === superCtor;
       }
+      if (result) result = ctor;
       return result;
     },
     newPrototype: function(aClass, aConstructor) {

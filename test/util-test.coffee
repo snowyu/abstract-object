@@ -82,8 +82,8 @@ describe "inherits", ->
     assert.equal A1.super_, A
     assert.equal A.super_, Root
     assert.equal Root.super_, undefined
-    assert.equal util.isInheritedFrom(A1, Root), true
-    assert.equal util.isInheritedFrom(A1, A), true
+    assert.equal util.isInheritedFrom(A1, Root), A
+    assert.equal util.isInheritedFrom(A1, A), A1
     assert.equal util.isInheritedFrom(A1, B), false, "A1 is not inherited from B"
     assert.equal util.isInheritedFrom(A, B), false, "A is not inherited from B"
 
@@ -107,6 +107,34 @@ describe "inherits", ->
     assert.equal bProto.cMethod, cMethod
     assert.equal bProto.constructor, C
     assert.equal bProto, C::
+  it "test inheritsDirectly and isInheritedFrom", ->
+    inheritsDirectly = util.inheritsDirectly
+    isInheritedFrom = util.isInheritedFrom
+    cMethod = ->"cMethod"
+    R = ->"R"
+    R::className = "R"
+    C = ->"C"
+    C::className = "C"
+    C::cMethod = cMethod
+
+    C1 = -> "C1"
+    C1::className = "C1"
+    C11 = -> "C11"
+    C11::className = "C11"
+    C2 = -> "C2"
+
+    assert.ok inherits(C, R), "C inherits from R"
+    assert.ok inherits(C1, C), "C1 inherits from C"
+    assert.ok inherits(C11, C1), "C11 inherits from C1"
+    assert.ok inherits(C2, C), "C2 inherits from C"
+    # C11 > C1 > C
+    baseClass = isInheritedFrom C11, C
+    assert.equal baseClass, C1
+    inheritsDirectly baseClass, C2
+    # C11 > C1 > C2 > C
+    assert.ok isInheritedFrom C11, C2, "C11 > C2"
+    assert.ok isInheritedFrom C11, C1, "C11 > C1"
+    assert.ok isInheritedFrom C11, C, "C11 > C"
 
   describe "createObject", ->
     createObject = util.createObject
