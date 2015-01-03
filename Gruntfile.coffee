@@ -74,7 +74,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-newer')
   grunt.loadNpmTasks('powerbuild')
 
-  grunt.registerTask('build', ['newer:coffee', 'copy'])
+  grunt.registerTask('build', ['newer:coffee', 'newer:copy'])
   grunt.registerTask('rebuild', ['clean', 'build'])
   grunt.registerTask('test', ['build', 'mochaTest'])
   grunt.registerTask('watch', ['watch'])
