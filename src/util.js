@@ -278,8 +278,9 @@ var util = module.exports = {
 
   */
   inject: function ( aOrgFunc, aBeforeExec, aAtferExec ) {
+    var arraySlice = Array.prototype.slice;
     return function() {
-      var Result, isDenied=false, args=[].slice.call(arguments);
+      var Result, isDenied=false, args=arraySlice.call(arguments);
       if (typeof(aBeforeExec) === 'function') {
         //the result
         //  * a return value instead of original function.
@@ -289,7 +290,7 @@ var util = module.exports = {
         //    * return undefined to allow execution
         Result = aBeforeExec.apply(this, args);
         if (util.isArguments(Result)) {
-          args = [].slice.call(Result)
+          args = arraySlice.call(Result)
         }
         else if (isDenied = Result !== undefined)
           args.push(Result)
