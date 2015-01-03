@@ -132,9 +132,9 @@ describe "inherits", ->
     assert.equal baseClass, C1
     inheritsDirectly baseClass, C2
     # C11 > C1 > C2 > C
-    assert.ok isInheritedFrom C11, C2, "C11 > C2"
-    assert.ok isInheritedFrom C11, C1, "C11 > C1"
-    assert.ok isInheritedFrom C11, C, "C11 > C"
+    assert.equal isInheritedFrom(C11, C2), C1, "C11 > C2"
+    assert.equal isInheritedFrom(C11, C1), C11, "C11 > C1"
+    assert.equal isInheritedFrom(C11, C), C2, "C11 > C"
 
   describe "createObject", ->
     createObject = util.createObject
