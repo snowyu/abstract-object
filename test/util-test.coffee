@@ -82,6 +82,7 @@ describe "inherits", ->
     assert.equal A1.super_, A
     assert.equal A.super_, Root
     assert.equal Root.super_, undefined
+    assert.equal util.isInheritedFrom(A, Root), A
     assert.equal util.isInheritedFrom(A1, Root), A
     assert.equal util.isInheritedFrom(A1, A), A1
     assert.equal util.isInheritedFrom(A1, B), false, "A1 is not inherited from B"

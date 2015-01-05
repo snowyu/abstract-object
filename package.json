@@ -7,11 +7,9 @@
   "files": [
     "README.md",
     "LICENSE-MIT",
-    "index.js",
-    "RefObject.js",
-    "util.js",
-    "Error.js",
+    "*.js",
     "test",
+    "src",
     "lib"
   ],
   "scripts": {
