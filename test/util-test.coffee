@@ -311,3 +311,22 @@ describe "inject", ->
     onAfter.should.have.been.calledOnce
     runOrg.should.have.been.calledOnce
 
+describe "isRegExp", ->
+  isRegExp = util.isRegExp
+  it "should check a RegExp instance correct", ->
+    isRegExp(/ahi/).should.be.true
+    isRegExp(new RegExp()).should.be.true
+  it "should check an illegal RegExp argument correct", ->
+    isRegExp().should.be.false
+    isRegExp(RegExp).should.be.false
+    isRegExp("/sdd/g").should.be.false
+
+describe "isDate", ->
+  isDate = util.isDate
+  it "should check a Date instance correct", ->
+    isDate(new Date()).should.be.true
+    isDate(new Date(2015,1,1)).should.be.true
+  it "should check an illegal date argument correct", ->
+    isDate().should.be.false
+    isDate(Date).should.be.false
+    isDate("2015-01-01").should.be.false

@@ -30,10 +30,22 @@ var support = {};
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var getOwnPropertyNames = Object.getOwnPropertyNames; //>=ECMAScript5 only
 
+function objectToString(o) {
+  return Object.prototype.toString.call(o);
+}
+
+function isObject(arg) {
+  return arg != null && typeof arg === 'object';
+}
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+function isArguments(value) {
+  return value && typeof value == 'object' && typeof value.length == 'number' &&
+    toString.call(value) == argsClass || false;
+}
 var util = module.exports = {
-    objectToString: function(o) {
-      return Object.prototype.toString.call(o);
-    },
+    objectToString: objectToString,
 
     isArray: Array.isArray,
 
@@ -57,21 +69,17 @@ var util = module.exports = {
       return arg === void 0;
     },
 
-    isObject: function(arg) {
-      return arg != null && typeof arg === 'object';
-    },
+    isObject: isObject,
 
-    isFunction: function(arg) {
-      return typeof arg === 'function';
-    },
+    isFunction: isFunction,
 
     isDate: function(d) {
-      return util.isObject(d) && util.objectToString(d) === '[object Date]';
+      return isObject(d) && objectToString(d) === dateClass;
     },
-    isArguments: function(value) {
-      return value && typeof value == 'object' && typeof value.length == 'number' &&
-        toString.call(value) == argsClass || false;
+    isRegExp: function(v) {
+      return isObject(v) && objectToString(v) === regexpClass;
     },
+    isArguments: isArguments,
     isEmpty: function(value) {
       var result = true;
       if (!value) {
@@ -81,8 +89,8 @@ var util = module.exports = {
           length = value.length;
 
       if ((className == arrayClass || className == stringClass ||
-          (support.argsClass ? className == argsClass : util.isArguments(value))) ||
-          (className == objectClass && typeof length == 'number' && util.isFunction(value.splice))) {
+          (support.argsClass ? className == argsClass : isArguments(value))) ||
+          (className == objectClass && typeof length == 'number' && isFunction(value.splice))) {
         return !length;
       }
 
@@ -207,7 +215,7 @@ var util = module.exports = {
     },
     _extend: function(origin, add) {
       // Don't do anything if add isn't an object
-      if (!add || !util.isObject(add)) return origin;
+      if (!add || !isObject(add)) return origin;
 
       var keys = Object.keys(add);
       var i = keys.length;
