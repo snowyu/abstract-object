@@ -1,8 +1,4 @@
-# AbtractObject
-
-[![Build Status](https://secure.travis-ci.org/snowyu/abstract-object.png?branch=master)](http://travis-ci.org/snowyu/abstract-object)
-
-[![NPM](https://nodei.co/npm/abstract-object.png?stars&downloads&downloadRank)](https://nodei.co/npm/abstract-object/) [![NPM](https://nodei.co/npm-dl/abstract-object.png?months=6&height=3)](https://nodei.co/npm/abstract-object/)
+# AbtractObject [![Build Status](https://img.shields.io/travis/snowyu/abstract-object/master.png)](http://travis-ci.org/snowyu/abstract-object) [![npm](https://img.shields.io/npm/v/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![downloads](https://img.shields.io/npm/dm/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![license](https://img.shields.io/npm/l/abstract-object.svg)](https://npmjs.org/package/abstract-object) 
 
 AbstractObject with Object State Events Supports and `free` method provides.
 

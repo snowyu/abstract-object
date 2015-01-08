@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
@@ -59,12 +59,7 @@
     "name": "Riceball LEE",
     "email": "snowyu.lee@gmail.com"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/snowyu/abstract-object/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/snowyu/abstract-object/issues"
   }
