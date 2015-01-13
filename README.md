@@ -8,7 +8,7 @@ The derived class should overwrite the `init`, `final` methods.
   * `create`(class, ...): the `create` class method uses to create a new object instance(the util.createObject is the same function).
     * `class`: the class constructor to create a new instance.
     * `...`: the left arguments will be passed into the class constructor.
-  * `createWith`(class, arguments): the `createWith` class method uses to create a new object instance(the util.createObject is the same function).
+  * `createWith`(class, arguments): the `createWith` class method uses to create a new object instance(the util.createObjectWith is the same function).
     * `class`: the class constructor to create a new instance.
     * `arguments` *(array)*: the arguments will be passed into the class constructor.
   * `init(...)`: abstract initialization method after a new instance creating.
