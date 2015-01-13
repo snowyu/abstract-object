@@ -330,3 +330,76 @@ describe "isDate", ->
     isDate().should.be.false
     isDate(Date).should.be.false
     isDate("2015-01-01").should.be.false
+
+describe "isUndefined", ->
+  isUndefined = util.isUndefined
+  it "should check undefined type correct", ->
+    isUndefined(undefined).should.be.true
+    isUndefined(`undefined`).should.be.true
+  it "should check an other type to false", ->
+    isUndefined(null).should.be.false
+    isUndefined(Date).should.be.false
+    isUndefined(false).should.be.false
+    isUndefined(0).should.be.false
+    isUndefined('undefined').should.be.false
+
+describe "isNullOrUndefined", ->
+  isNullOrUndefined = util.isNullOrUndefined
+  it "should check undefined type correct", ->
+    isNullOrUndefined(undefined).should.be.true
+  it "should check null type correct", ->
+    isNullOrUndefined(null).should.be.true
+  it "should check an other type to false", ->
+    isNullOrUndefined(Date).should.be.false
+    isNullOrUndefined(false).should.be.false
+    isNullOrUndefined(0).should.be.false
+    isNullOrUndefined('undefined').should.be.false
+
+describe "isObject", ->
+  isObject = util.isObject
+  it "should check object type correct", ->
+    Obj = ->
+    obj = Object.create(null)
+    isObject({}).should.be.true
+    isObject(obj).should.be.true
+    isObject(new Obj()).should.be.true
+    isObject(new Date()).should.be.true
+    isObject(/dd/).should.be.true
+  it "should check an other type to false", ->
+    isObject(null).should.be.false
+    isObject("object").should.be.false
+    isObject(false).should.be.false
+    isObject(true).should.be.false
+    isObject(0).should.be.false
+    isObject(->).should.be.false
+
+describe "isFunction", ->
+  isFunction = util.isFunction
+  it "should check function type correct", ->
+    isFunction(->).should.be.true
+    isFunction(Date).should.be.true
+    isFunction(RegExp).should.be.true
+  it "should check an other type to false", ->
+    isFunction(new RegExp()).should.be.false
+    isFunction(new ->).should.be.false
+    isFunction(false).should.be.false
+    isFunction(true).should.be.false
+    isFunction(0).should.be.false
+    isFunction(null).should.be.false
+    isFunction(undefined).should.be.false
+    isFunction("").should.be.false
+
+describe "isString", ->
+  isString = util.isString
+  it "should check string type correct", ->
+    isString("").should.be.true
+    isString("hello").should.be.true
+  it "should check an other type to false", ->
+    isString(new RegExp()).should.be.false
+    isString(new ->).should.be.false
+    isString(false).should.be.false
+    isString(true).should.be.false
+    isString(0).should.be.false
+    isString(null).should.be.false
+    isString(undefined).should.be.false
+
