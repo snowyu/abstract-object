@@ -402,4 +402,19 @@ describe "isString", ->
     isString(0).should.be.false
     isString(null).should.be.false
     isString(undefined).should.be.false
+describe "_extend", ->
+  extend = util._extend
+  it "should extend an object", ->
+    org = {a: 1, b:2}
+    add = {a: 3}
+    extend(org, add).should.be.equal org
+    org.should.be.deep.equal {a:3, b:2}
+    extend org, b:4, c:2
+    org.should.be.deep.equal {a:3, b:4, c:2}
+  it "should extend many object", ->
+    org = {a: 1, b:2}
+    add = {a: 3}
+    third = {c:4}
+    extend(org, add, third, {d:5, b:0}).should.be.equal org
+    org.should.be.deep.equal {a:3, b:0, c:4, d:5}
 
