@@ -36,7 +36,7 @@
     "grunt-usemin": "*",
     "mocha": "~2.0.1",
     "powerbuild": "*",
-    "sinon": "~1.11.1",
+    "sinon": "~1.12.2",
     "sinon-chai": "~2.6.0",
     "source-map-support": "*"
   },
