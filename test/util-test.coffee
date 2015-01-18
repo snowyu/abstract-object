@@ -87,6 +87,11 @@ describe "inherits", ->
     assert.equal util.isInheritedFrom(A1, A), A1
     assert.equal util.isInheritedFrom(A1, B), false, "A1 is not inherited from B"
     assert.equal util.isInheritedFrom(A, B), false, "A is not inherited from B"
+    o = new A()
+    assert.equal o.rootMethod, Root::rootMethod
+    o = new A1()
+    assert.equal o.rootMethod, Root::rootMethod
+
 
   it "test inheritsObject", ->
     cMethod = ->
