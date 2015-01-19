@@ -1,4 +1,8 @@
+var isInheritedFromStr = require('./isInheritedFromStr');
+var isString = require('./isString');
+
 module.exports = function(ctor, superCtor) {
+  if (isString(superCtor)) return isInheritedFromStr(ctor, superCtor);
   var result  = ctor.super_ === superCtor;
   var checkeds = [];
   var lastCtor = ctor;

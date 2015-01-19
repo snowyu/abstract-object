@@ -47,27 +47,21 @@ describe "inherits", ->
     "a1Method"
 
 
-  Root = (@inited="Root", @other)->
-    "Root"
+  
+  class Root 
+    constructor: (@inited="Root", @other)->"Root"
+    rootMethod: ->
 
-  Root::className = "Root"
-  Root::rootMethod = ->
+  class B 
+    constructor: (@inited="B")->"B"
+    bMethod: ->
 
-  B = (@inited="B")->
-    "B"
+  class A
+    aMethod: aMethod
 
-  B::className = "B"
-  B::bMethod = ->
-
-  A = ->
-
-  A::aMethod = aMethod
-  A::className = "A"
-  A1 = (@inited="A1")->
-    "A1"
-
-  A1::a1Method = a1Method
-  A1::className = "A1"
+  class A1
+    constructor: (@inited="A1")->"A1"
+    a1Method: a1Method
 
   it "test inherits and isInheritedFrom", ->
     assert.equal util.inherits(A, Root), true
@@ -92,6 +86,13 @@ describe "inherits", ->
     o = new A1()
     assert.equal o.rootMethod, Root::rootMethod
 
+  it "test isInheritedFrom with class name", ->
+    isInheritedFrom = util.isInheritedFrom
+    assert.equal isInheritedFrom(A, 'Root'), A
+    assert.equal isInheritedFrom(A1, 'Root'), A
+    assert.equal isInheritedFrom(A1, 'A'), A1
+    assert.equal isInheritedFrom(A1, 'B'), false, "A1 is not inherited from B"
+    assert.equal isInheritedFrom(A, 'B'), false, "A is not inherited from B"
 
   it "test inheritsObject", ->
     cMethod = ->
@@ -99,7 +100,7 @@ describe "inherits", ->
     C = ->
       "C"
 
-    C::className = "C"
+    C.name = "C"
     C::cMethod = cMethod
     b = new B()
     assert.equal util.inheritsObject(b, C), true
@@ -118,15 +119,15 @@ describe "inherits", ->
     isInheritedFrom = util.isInheritedFrom
     cMethod = ->"cMethod"
     R = ->"R"
-    R::className = "R"
+    R.name = "R"
     C = ->"C"
-    C::className = "C"
+    C.name = "C"
     C::cMethod = cMethod
 
     C1 = -> "C1"
-    C1::className = "C1"
+    C1.name = "C1"
     C11 = -> "C11"
-    C11::className = "C11"
+    C11.name = "C11"
     C2 = -> "C2"
 
     assert.ok inherits(C, R), "C inherits from R"

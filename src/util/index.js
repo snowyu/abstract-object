@@ -39,6 +39,7 @@ var util = module.exports = {
      */
     inherits: require('./inherits'),
     isInheritedFrom: require('./isInheritedFrom'),
+    isInheritedFromStr: require('./isInheritedFromStr'),
     newPrototype: require('./newPrototype'),
     createObjectWith: require('./createObjectWith'),
     createObject: require('./createObject'),
