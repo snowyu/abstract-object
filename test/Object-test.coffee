@@ -50,6 +50,23 @@ describe "AbstractObject", ->
           obj.on 'destroyed', ->
             done()
           obj.free()
+    describe "finalization method", ->
+      it 'should pass options to final method when free(options)', ->
+          class TestObject
+            inherits TestObject, AbstractObject
+            final: sinon.spy()
+          obj = AbstractObject.create(TestObject)
+          opts = test:123,a:2
+          obj.free(opts, 32)
+          obj.final.should.be.calledWith opts, 32
+      it 'should remove all event listeners after free', ->
+          class TestObject
+            inherits TestObject, AbstractObject
+          obj = AbstractObject.create(TestObject)
+          obj.on 'destroyed', ->
+          obj.on 'destroyed', -> "dd"
+          obj.listeners('destroyed').should.be.length 2
+          obj.free()
           obj.listeners('destroyed').should.be.length 0
     describe "initialization method", ->
       it 'should pass the arguments into the initialization method', (done)->

@@ -1,4 +1,6 @@
 chai            = require 'chai'
+sinon           = require 'sinon'
+sinonChai       = require 'sinon-chai'
 should          = chai.should()
 AbstractObject  = require '../index'
 RefObject       = require '../RefObject'
@@ -6,9 +8,12 @@ util            = require '../lib/util'
 inherits        = util.inherits
 setImmediate    = setImmediate || process.nextTick
 
+chai.use(sinonChai)
+
 describe "RefObject", ->
     class TestObject
       inherits TestObject, RefObject
+      final: sinon.spy -> RefObject::final.apply @, arguments
       init: ->
         super
         setImmediate =>
@@ -41,6 +46,12 @@ describe "RefObject", ->
           obj.on 'destroyed', ->
             done()
           obj.free()
+    describe "finalization method", ->
+      it 'should pass options to final method when free(options)', ->
+          obj = AbstractObject.create(TestObject)
+          opts = test:123,a:2
+          obj.free(opts, "hi", 23)
+          obj.final.should.be.calledWith opts, "hi", 23
     describe "initialization method", ->
       it 'should pass the arguments into the initialization method', (done)->
         class TestObject2

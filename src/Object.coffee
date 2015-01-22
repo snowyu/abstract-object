@@ -63,11 +63,11 @@ module.exports = class AbstractObject
       @changeObjectState OBJECT_STATES.inited
   destroy: ->
     @changeObjectState OBJECT_STATES.destroying
-    @final()
+    @final.apply @, arguments
     @changeObjectState OBJECT_STATES.destroyed
     @removeAllListeners()
   free: ->
-    @destroy()
+    @destroy.apply @, arguments
   # dispatch(event, args[, callback])
   dispatch: (event, args, callback) ->
     if isUndefined(callback) and isFunction(args)

@@ -21,7 +21,7 @@ module.exports = class RefObject
     ++@RefCount
   release: ->
     result = --@RefCount
-    @destroy() if result < 0
+    @destroy.apply @, arguments if result < 0
     result
-  free: RefObject.prototype.release
+  free: @::release
 
