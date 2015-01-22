@@ -64,6 +64,7 @@ module.exports = class AbstractObject
   destroy: ->
     @changeObjectState OBJECT_STATES.destroying
     @final()
+    @removeAllListeners()
     @changeObjectState OBJECT_STATES.destroyed
   free: ->
     @destroy()
