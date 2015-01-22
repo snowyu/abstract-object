@@ -13,8 +13,10 @@ The derived class should overwrite the `init`, `final` methods.
     * `arguments` *(array)*: the arguments will be passed into the class constructor.
   * `init(...)`: abstract initialization method after a new instance creating.
     * `...`: the constructor's arguments should be passed into init method.
-  * `final`: abstract finalization method before the instance destroying.
-  * `free`: free the class instance.
+  * `final`(...): abstract finalization method before the instance destroying.
+    * `...`: the free(destroy)'s arguments should be passed into final method.
+  * `free`(...): free the class instance.
+    * `...`: optional arguments will be passed into final method to process.
   * `dispatch`(event, args[, callback]): dispath an event or callback
     * `event`: the event name
     * `args`: the args are passed to event or callback
