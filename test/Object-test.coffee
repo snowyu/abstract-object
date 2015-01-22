@@ -50,6 +50,7 @@ describe "AbstractObject", ->
           obj.on 'destroyed', ->
             done()
           obj.free()
+          obj.listeners('destroyed').should.be.length 0
     describe "initialization method", ->
       it 'should pass the arguments into the initialization method', (done)->
         class TestObject
