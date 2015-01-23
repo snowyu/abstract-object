@@ -39,6 +39,11 @@ module.exports = class AbstractObject
   @.prototype.__defineGetter__ "objectState", ->
     vState = @_objectState_
     if not vState? then "destroyed" else OBJECT_STATES_STR[vState]
+  for vStateName, vState of OBJECT_STATES
+    s = 'is'+ vStateName[0].toUpperCase() + vStateName.slice(1)
+    @::[s] = ((aState)-> 
+      -> @_objectState_ is aState
+    )(vState)
   setObjectState: (value, emitted = true)->
     @_objectState_ = OBJECT_STATES[value]
     @emit value, @ if emitted

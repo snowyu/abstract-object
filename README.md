@@ -24,6 +24,8 @@ The derived class should overwrite the `init`, `final` methods.
   * `dispatchError`(error[, callback]):
     * `error`: the error instance.
     * `callback`: optional, it will not dispatch `'error'` event if the callback is exists, unless the callback return false.
+  * `isIniting`(), `isInited`(),`isDestroying`(), `isDestroyed`() methods:
+    * to test object state methods
 
 * Events:
   * `'initing'`: emit before the init method

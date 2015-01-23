@@ -25,6 +25,37 @@ describe "AbstractObject", ->
       obj = AbstractObject.create(TestObject)
       obj.on 'inited', ->
         done()
+    describe "Object State methods", ->
+      it '.isIniting()', (done)->
+          class TestObject
+            inherits TestObject, AbstractObject
+            init: ->
+              @isIniting().should.be.true
+              done()
+              return
+          obj = AbstractObject.create(TestObject)
+      it '.isInited()', ->
+          class TestObject
+            inherits TestObject, AbstractObject
+          obj = AbstractObject.create(TestObject)
+          obj.isInited().should.be.true
+      it '.isDestroying()', (done)->
+          class TestObject
+            inherits TestObject, AbstractObject
+            final: ->
+              @.isDestroying().should.be.true
+              done()
+          obj = AbstractObject.create(TestObject)
+          obj.isInited().should.be.true
+          obj.free()
+      it '.isDestroyed()', ->
+          class TestObject
+            inherits TestObject, AbstractObject
+          obj = AbstractObject.create(TestObject)
+          obj.isInited().should.be.true
+          obj.free()
+          obj.isDestroyed().should.be.true
+
     describe "Object State Events", ->
       it 'should emit the "inited" event', (done)->
           class TestObject
