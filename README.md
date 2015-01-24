@@ -15,10 +15,10 @@ The derived class should overwrite the `initialize` and `finalize` methods.
     * `...`: the constructor's arguments should be passed into initialize method.
   * `finalize`(...): abstract finalization method before the instance destroying.
     * `...`: the free(destroy)'s arguments should be passed into finalize method.
-  * `init(...)`: abstract initialization method after a new instance creating. (**deprecated**)
+  * (**deprecated**) *`init(...)`: abstract initialization method after a new instance creating.*
     * init method is deprecated, pls use initialize method instead
     * `...`: the constructor's arguments should be passed into init method.
-  * `final`(...): abstract finalization method before the instance destroying. (**deprecated**)
+  * (**deprecated**) *`final`(...): abstract finalization method before the instance destroying.*
     * final method is deprecated, pls use finalize instead
     * `...`: the free(destroy)'s arguments should be passed into final method.
   * `free`(...): free the class instance.
@@ -56,13 +56,13 @@ The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddR
 ```coffee
 AbstractObject = require('abstract-object')
 RefObject = require('abstract-object/RefObject')
-inherits = require('abstract-object/lib/util').inherits
+inherits = require('abstract-object/lib/util/inherits')
 createObject = AbstractObject.createObject
 
 class MyObject
   inherits MyObject, RefObject
   initialize: (@a,@b)->
-    super()
+    super
 
 myObj = createObject(MyObject, 1, 2)
 
@@ -77,7 +77,7 @@ class MyObject
     super
   initialize: (@a,@b)->
     # must call super method here for RefObject initialization:
-    super()
+    super
 
 ```
 
