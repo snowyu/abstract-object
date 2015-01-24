@@ -17,7 +17,7 @@ describe "AbstractObject", ->
     #after (done)->
     it "AbstractObject constructor should be called", (done)->
       TestObject = ->
-      TestObject::init= ->
+      TestObject::initialize= ->
         setImmediate =>
           @setObjectState "inited"
         return true
@@ -29,7 +29,7 @@ describe "AbstractObject", ->
       it '.isIniting()', (done)->
           class TestObject
             inherits TestObject, AbstractObject
-            init: ->
+            initialize: ->
               @isIniting().should.be.true
               done()
               return
@@ -42,7 +42,7 @@ describe "AbstractObject", ->
       it '.isDestroying()', (done)->
           class TestObject
             inherits TestObject, AbstractObject
-            final: ->
+            finalize: ->
               @.isDestroying().should.be.true
               done()
           obj = AbstractObject.create(TestObject)
@@ -60,7 +60,7 @@ describe "AbstractObject", ->
       it 'should emit the "inited" event', (done)->
           class TestObject
             inherits TestObject, AbstractObject
-            init: ->
+            initialize: ->
               setImmediate =>
                 @setObjectState "inited"
               return true
@@ -85,11 +85,11 @@ describe "AbstractObject", ->
       it 'should pass options to final method when free(options)', ->
           class TestObject
             inherits TestObject, AbstractObject
-            final: sinon.spy()
+            finalize: sinon.spy()
           obj = AbstractObject.create(TestObject)
           opts = test:123,a:2
           obj.free(opts, 32)
-          obj.final.should.be.calledWith opts, 32
+          obj.finalize.should.be.calledWith opts, 32
       it 'should remove all event listeners after free', ->
           class TestObject
             inherits TestObject, AbstractObject
@@ -103,7 +103,7 @@ describe "AbstractObject", ->
       it 'should pass the arguments into the initialization method', (done)->
         class TestObject
           inherits TestObject, AbstractObject
-          init:->
+          initialize:->
             arguments.should.have.length(3)
             arguments.should.have.property '0', 'abc'
             arguments.should.have.property '1', '321'
@@ -119,7 +119,7 @@ describe "AbstractObject", ->
             if not (this instanceof A2)
               return AbstractObject.createWith(A2, arguments)
             super
-          init:(@first, @second, @third)->
+          initialize:(@first, @second, @third)->
             arguments.should.have.length(3)
             arguments.should.have.property '0', 'abc'
             arguments.should.have.property '1', '321'
@@ -133,7 +133,7 @@ describe "AbstractObject", ->
       err = new NotFoundError('FallingError')
       class TestObject
         inherits TestObject, AbstractObject
-        init:(@first, @second, @third)->
+        initialize:(@first, @second, @third)->
       it 'should callback error only when callback exists and return nothing', ->
         obj = AbstractObject.create(TestObject, 1,2,3)
         onErrorEvent = sinon.spy()
@@ -172,7 +172,7 @@ describe "AbstractObject", ->
       err = 'DispatchError'
       class TestObject
         inherits TestObject, AbstractObject
-        init:(@first, @second, @third)->
+        initialize:(@first, @second, @third)->
       it 'should callback only when callback exists and return nothing', ->
         obj = AbstractObject.create(TestObject, 1,2,3)
         onErrorEvent = sinon.spy()

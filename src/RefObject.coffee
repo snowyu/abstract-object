@@ -14,9 +14,13 @@ inherits        = util.inherits
 
 module.exports = class RefObject
   inherits RefObject, AbstractObject
-  # abstract initialization method
-  init: ->
+  # initialization method
+  initialize: ->
     @RefCount = 0
+    if @init
+      console.error "init method is deprecated, pls use initialize instead"
+      RefObject::init = (->) unless RefObject::init
+      @init.apply @, arguments # keep back compatibility
   addRef: ->
     ++@RefCount
   release: ->

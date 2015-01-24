@@ -57,18 +57,26 @@ module.exports = class AbstractObject
         @emit OBJECT_STATES_STR[value], @
 
   # abstract initialization method
-  init: ->
+  initialize: ->
+    if isFunction @init
+      console.error "init method is deprecated, pls use initialize instead"
+      AbstractObject::init = (->) unless AbstractObject::init
+      @init.apply @, arguments
   # abstract finalization method
-  final:->
+  finalize: ->
+    if isFunction @final
+      console.error "final method is deprecated, pls use finalize instead"
+      AbstractObject::final = (->) unless AbstractObject::final
+      @final.apply @, arguments
   constructor: ->
     #@setObjectState "initing"
     @changeObjectState OBJECT_STATES.initing
     @setMaxListeners(Infinity)
-    if @init.apply(@, arguments) isnt true
+    if @initialize.apply(@, arguments) isnt true
       @changeObjectState OBJECT_STATES.inited
   destroy: ->
     @changeObjectState OBJECT_STATES.destroying
-    @final.apply @, arguments
+    @finalize.apply @, arguments
     @changeObjectState OBJECT_STATES.destroyed
     @removeAllListeners()
   free: ->

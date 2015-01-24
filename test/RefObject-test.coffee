@@ -13,8 +13,8 @@ chai.use(sinonChai)
 describe "RefObject", ->
     class TestObject
       inherits TestObject, RefObject
-      final: sinon.spy -> RefObject::final.apply @, arguments
-      init: ->
+      finalize: sinon.spy -> RefObject::finalize.apply @, arguments
+      initialize: ->
         super
         setImmediate =>
           @setObjectState "inited"
@@ -23,7 +23,7 @@ describe "RefObject", ->
     #after (done)->
     it "RefObject constructor should be called", (done)->
       TestObject1 = ->
-      TestObject1::init= ->
+      TestObject1::initialize= ->
         setImmediate =>
           @setObjectState "inited"
         return true
@@ -47,16 +47,16 @@ describe "RefObject", ->
             done()
           obj.free()
     describe "finalization method", ->
-      it 'should pass options to final method when free(options)', ->
+      it 'should pass options to finalize method when free(options)', ->
           obj = AbstractObject.create(TestObject)
           opts = test:123,a:2
           obj.free(opts, "hi", 23)
-          obj.final.should.be.calledWith opts, "hi", 23
+          obj.finalize.should.be.calledWith opts, "hi", 23
     describe "initialization method", ->
       it 'should pass the arguments into the initialization method', (done)->
         class TestObject2
           inherits TestObject2, RefObject
-          init:->
+          initialize:->
             arguments.should.have.length(3)
             arguments.should.have.property '0', 'abc'
             arguments.should.have.property '1', '321'
@@ -68,7 +68,7 @@ describe "RefObject", ->
           inherits TestObject2, RefObject
           constructor: ->
             super
-          init:->
+          initialize:->
             arguments.should.have.length(3)
             arguments.should.have.property '0', 'abc'
             arguments.should.have.property '1', '321'

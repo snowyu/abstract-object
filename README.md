@@ -2,7 +2,7 @@
 
 AbstractObject with Object State Events Supports and `free` method provides.
 
-The derived class should overwrite the `init`, `final` methods.
+The derived class should overwrite the `initialize` and `finalize` methods.
 
 * Methods:
   * `create`(class, ...): the `create` class method uses to create a new object instance(the util.createObject is the same function).
@@ -11,9 +11,15 @@ The derived class should overwrite the `init`, `final` methods.
   * `createWith`(class, arguments): the `createWith` class method uses to create a new object instance(the util.createObjectWith is the same function).
     * `class`: the class constructor to create a new instance.
     * `arguments` *(array)*: the arguments will be passed into the class constructor.
-  * `init(...)`: abstract initialization method after a new instance creating.
+  * `initialize(...)`: abstract initialization method after a new instance creating.
+    * `...`: the constructor's arguments should be passed into initialize method.
+  * `finalize`(...): abstract finalization method before the instance destroying.
+    * `...`: the free(destroy)'s arguments should be passed into finalize method.
+  * `init(...)`: abstract initialization method after a new instance creating. (**deprecated**)
+    * init method is deprecated, pls use initialize method instead
     * `...`: the constructor's arguments should be passed into init method.
-  * `final`(...): abstract finalization method before the instance destroying.
+  * `final`(...): abstract finalization method before the instance destroying. (**deprecated**)
+    * final method is deprecated, pls use finalize instead
     * `...`: the free(destroy)'s arguments should be passed into final method.
   * `free`(...): free the class instance.
     * `...`: optional arguments will be passed into final method to process.
@@ -24,14 +30,14 @@ The derived class should overwrite the `init`, `final` methods.
   * `dispatchError`(error[, callback]):
     * `error`: the error instance.
     * `callback`: optional, it will not dispatch `'error'` event if the callback is exists, unless the callback return false.
-  * `isIniting`(), `isInited`(),`isDestroying`(), `isDestroyed`() methods:
-    * to test object state methods
+  * `isIniting`(), `isInited`(),`isDestroying`(), `isDestroyed`() object state testing methods:
+    * to test object state
 
 * Events:
-  * `'initing'`: emit before the init method
-  * `'inited'`: emit after the init method
-  * `'destroying'`: emit before the final method
-  * `'destroyed'`: emit after the final method
+  * `'initing'`: emit before the initialize method
+  * `'inited'`: emit after the initialize method
+  * `'destroying'`: emit before the finalize method
+  * `'destroyed'`: emit after the finalize method
 
 
 # RefObject
@@ -55,7 +61,7 @@ createObject = AbstractObject.createObject
 
 class MyObject
   inherits MyObject, RefObject
-  init: (@a,@b)->
+  initialize: (@a,@b)->
     super()
 
 myObj = createObject(MyObject, 1, 2)
@@ -69,7 +75,7 @@ class MyObject
   constructor: ->
     # must call super method here:
     super
-  init: (@a,@b)->
+  initialize: (@a,@b)->
     # must call super method here for RefObject initialization:
     super()
 
@@ -96,9 +102,9 @@ var MyObject = function(){}
 util.inherits(MyObject, RefObject)
 
 
-MyObject.prototype.init = function(a,b) {
+MyObject.prototype.initialize = function(a,b) {
   //super call
-  MyObject.__super__.init.call(this);
+  MyObject.__super__.initialize.call(this);
   this.a = a
   this.b = b
 }
