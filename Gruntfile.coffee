@@ -39,15 +39,6 @@ module.exports = (grunt) ->
           check: ['src/**/*.coffee', 'test/**/*.js', 'test/**/*.coffee']
         src: ['test/**/*.coffee']
 
-    powerbuild:
-      options:
-        sourceMap: true
-        node: false
-        handlers:
-          '.coffee': (src, canonicalName) ->
-            {js, v3SourceMap} = coffee.compile src, sourceMap: true, bare: true
-            return {code: js, map: v3SourceMap}
-
     watch:
       options:
         nospawn: true
@@ -72,7 +63,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks('grunt-contrib-coffee')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-newer')
-  grunt.loadNpmTasks('powerbuild')
 
   grunt.registerTask('build', ['newer:coffee', 'newer:copy'])
   grunt.registerTask('rebuild', ['clean', 'build'])
