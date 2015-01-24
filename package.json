@@ -35,10 +35,15 @@
     "grunt-saucelabs": "*",
     "grunt-usemin": "*",
     "mocha": "~2.0.1",
+    "pre-commit": "0.0.11",
     "sinon": "~1.12.2",
     "sinon-chai": "~2.6.0",
-    "source-map-support": "*"
+    "source-map-support": "*",
+    "which": "^1.0.8"
   },
+  "pre-commit": [
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/snowyu/abstract-object"
