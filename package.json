@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "1.6.5",
+  "version": "1.7.0",
   "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
@@ -35,7 +35,6 @@
     "grunt-saucelabs": "*",
     "grunt-usemin": "*",
     "mocha": "~2.0.1",
-    "powerbuild": "*",
     "sinon": "~1.12.2",
     "sinon-chai": "~2.6.0",
     "source-map-support": "*"
