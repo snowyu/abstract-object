@@ -426,17 +426,29 @@ describe "_extend", ->
 
 describe "mixin", ->
   mixin = require('../src/util/mixin')
+  inherits = require('../src/util/inherits')
   isInheritedFrom = require('../src/util/isInheritedFrom')
+  isMixinedFrom   = require('../src/util/isMixinedFrom')
+  class Root
   class A
     aMethod: ->
   class B1
     b1Method: ->
   class B2
     b2Method: ->
-  it.skip "should mixin class", ->
-    mixin A, B1, B2
-    isInheritedFrom(A, B1).should.be.true "A is inherited from B1"
-    isInheritedFrom(A, B2).should.be.true "A is inherited from B2"
+  it "should mixin class", ->
+    inherits(A, Root).should.be.true
+    isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
+    mixin(A, B1, B2).should.be.true
+    a = new A()
+    a.should.have.property 'b1Method'
+    a.should.have.property 'b2Method'
+    a.should.have.property 'aMethod'
+
+    isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
+    isMixinedFrom(A, B1).should.be.true "A is mixined from B1"
+    isMixinedFrom(A, B2).should.be.true "A is mixined from B2"
+
 
    
 

@@ -1,5 +1,7 @@
 var extend          = require('./_extend');
+var inherits        = require('./inherits');
 var isInheritedFrom = require('./isInheritedFrom');
+var isFunction      = require('./isFunction');
 var newPrototype    = require('./newPrototype');
 
 var getOwnPropertyNames = Object.getOwnPropertyNames;
@@ -26,23 +28,60 @@ var getOwnPropertyNames = Object.getOwnPropertyNames;
  *        B11.__super__ = MixinCtor
  *      method.__mixin_prototype__ = C.prototype
  *  B11 -> MixinCtor -> B1 -> B -> Root
+ *
+class Root
+   m: -> console.log 'root'
+class C
+   m: ->
+     console.log "c"
+     super
+class B
+class B11
+   m: -> 
+     console.log 'b11'
+     super
+
+mixin B11, C
+ *
  */
 
+
 function mixin(ctor, superCtor) {
+  function clonePrototype(dest, src) {
+    var names = getOwnPropertyNames(src);
+    for (var i = 1; i < names.length; i++ ) {
+      var k = names[i];
+      var method = src[k];
+      var originalMethod = dest[k];
+      if (isFunction(originalMethod) && originalMethod.__mixin_super__) {
+        method = (function(origM, newM) {
+          return function() {
+            ctor.__super__ = origM.__mixin_super__;
+            var result = newM.apply(this, arguments);
+            ctor.__super__ = ctor.mixinCtor_;
+            return result;
+          }
+        })(originalMethod, method);
+      }
+      if (isFunction(method)) method.__mixin_super__ = src;
+      dest[k] = method;
+    }
+  }
   var v  = ctor.super_;
   var result = false;
   if (!isInheritedFrom(ctor, superCtor)) {
-    if (!ctor.mixinCtor_) ctor.mixinCtor_ = function(){};
-    ctor.super_ = superCtor;
-    ctor.__super__ = superCtor.prototype; //for coffeeScirpt super keyword.
-    ctor.prototype = newPrototype(superCtor, ctor);
-    while (v != null) {
-      ctor = superCtor;
-      ctor.super_ = superCtor;
-      ctor.__super__ = superCtor.prototype; //for coffeeScirpt super keyword.
-      ctor.prototype = newPrototype(superCtor, ctor);
-      v = ctor.super_;
+    var mixinCtor = ctor.mixinCtor_;
+    var mixinCtors = ctor.mixinCtors_;
+    if (!mixinCtor) {
+      mixinCtor = ctor.mixinCtor_ = function _MixinCls_(){};
+      if (v && !inherits(mixinCtor, v)) return false;
     }
+    if (!mixinCtors) mixinCtors = ctor.mixinCtors_ = [];
+    mixinCtors.push(superCtor);//quickly check in isInheritedFrom for mixin.
+    clonePrototype(mixinCtor.prototype, superCtor.prototype);
+    ctor.super_ = mixinCtor;
+    ctor.__super__ = mixinCtor.prototype; //for coffeeScirpt super keyword.
+    ctor.prototype = newPrototype(mixinCtor, ctor);
     result = true;
   }
   return result;
