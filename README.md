@@ -198,5 +198,4 @@ assert.equal(err.code, 10000)
 
 ```
 
-
-
+* [mixin: C3MRO](https://www.python.org/download/releases/2.3/mro/)
