@@ -424,3 +424,19 @@ describe "_extend", ->
     extend(org, add, third, {d:5, b:0}).should.be.equal org
     org.should.be.deep.equal {a:3, b:0, c:4, d:5}
 
+describe "mixin", ->
+  mixin = require('../src/util/mixin')
+  isInheritedFrom = require('../src/util/isInheritedFrom')
+  class A
+    aMethod: ->
+  class B1
+    b1Method: ->
+  class B2
+    b2Method: ->
+  it.skip "should mixin class", ->
+    mixin A, B1, B2
+    isInheritedFrom(A, B1).should.be.true "A is inherited from B1"
+    isInheritedFrom(A, B2).should.be.true "A is inherited from B2"
+
+   
+
