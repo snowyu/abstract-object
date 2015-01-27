@@ -48,25 +48,32 @@ mixin B11, C
  */
 
 
+function isSuperInFunction(aMethod) {
+  return isFunction(aMethod) && aMethod.__mixin_super__ && aMethod.toString().indexOf('__super__')>=0;
+}
+
 function mixin(ctor, superCtor) {
   function clonePrototype(dest, src) {
-    var names = getOwnPropertyNames(src);
-    for (var i = 1; i < names.length; i++ ) {
+    var sp = src.prototype;
+    var dp = dest.prototype;
+    var names = getOwnPropertyNames(sp);
+    for (var i = 1; i < names.length; i++ ) { //i = 1 to skip constructor property
       var k = names[i];
-      var method = src[k];
-      var originalMethod = dest[k];
-      if (isFunction(originalMethod) && originalMethod.__mixin_super__) {
-        method = (function(origM, newM) {
+      var method = sp[k];
+      var originalMethod = dp[k];
+      if (isSuperInFunction(originalMethod) && sp !== originalMethod.__mixin_super__) {
+        method = (function(origM, newM, src) {
+          var oldSuper = src.__super__;
           return function() {
-            ctor.__super__ = origM.__mixin_super__;
+            src.__super__ = origM.__mixin_super__;
             var result = newM.apply(this, arguments);
-            ctor.__super__ = ctor.mixinCtor_;
+            src.__super__ = oldSuper;
             return result;
-          }
-        })(originalMethod, method);
+          };
+        })(originalMethod, method, src);
       }
-      if (isFunction(method)) method.__mixin_super__ = src;
-      dest[k] = method;
+      if (isFunction(method)) method.__mixin_super__ = sp;
+      dp[k] = method;
     }
   }
   var v  = ctor.super_;
@@ -79,8 +86,8 @@ function mixin(ctor, superCtor) {
       if (v) inheritsDirectly(mixinCtor, v);
     }
     if (!mixinCtors) mixinCtors = ctor.mixinCtors_ = [];
-    mixinCtors.push(superCtor);//quickly check in isInheritedFrom for mixin.
-    clonePrototype(mixinCtor.prototype, superCtor.prototype);
+    mixinCtors.push(superCtor);//quickly check in isMixinedFrom.
+    clonePrototype(mixinCtor, superCtor);
     ctor.super_ = mixinCtor;
     ctor.__super__ = mixinCtor.prototype; //for coffeeScirpt super keyword.
     ctor.prototype = newPrototype(mixinCtor, ctor);
