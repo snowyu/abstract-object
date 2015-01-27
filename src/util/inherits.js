@@ -16,6 +16,11 @@ var newPrototype = require('./newPrototype');
  */
 module.exports = function(ctor, superCtor) {
   var v  = ctor.super_;
+  var mixinCtor = ctor.mixinCtor_;
+  if (mixinCtor && v === mixinCtor) {
+    ctor = mixinCtor;
+    v = ctor.super_;
+  }
   var result = false;
   if (!isInheritedFrom(ctor, superCtor)) {
     ctor.super_ = superCtor;

@@ -1,6 +1,8 @@
 var extend          = require('./_extend');
 var inherits        = require('./inherits');
+var inheritsDirectly= require('./inheritsDirectly');
 var isInheritedFrom = require('./isInheritedFrom');
+var isMixinedFrom   = require('./isMixinedFrom');
 var isFunction      = require('./isFunction');
 var newPrototype    = require('./newPrototype');
 
@@ -69,12 +71,12 @@ function mixin(ctor, superCtor) {
   }
   var v  = ctor.super_;
   var result = false;
-  if (!isInheritedFrom(ctor, superCtor)) {
+  if (!isMixinedFrom(ctor, superCtor) && !isInheritedFrom(ctor, superCtor)) {
     var mixinCtor = ctor.mixinCtor_;
     var mixinCtors = ctor.mixinCtors_;
     if (!mixinCtor) {
-      mixinCtor = ctor.mixinCtor_ = function _MixinCls_(){};
-      if (v && !inherits(mixinCtor, v)) return false;
+      mixinCtor = ctor.mixinCtor_ = function MixinCtor_(){};
+      if (v) inheritsDirectly(mixinCtor, v);
     }
     if (!mixinCtors) mixinCtors = ctor.mixinCtors_ = [];
     mixinCtors.push(superCtor);//quickly check in isInheritedFrom for mixin.

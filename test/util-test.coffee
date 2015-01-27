@@ -429,25 +429,45 @@ describe "mixin", ->
   inherits = require('../src/util/inherits')
   isInheritedFrom = require('../src/util/isInheritedFrom')
   isMixinedFrom   = require('../src/util/isMixinedFrom')
-  class Root
-  class A
-    aMethod: ->
-  class B1
-    b1Method: ->
-  class B2
-    b2Method: ->
   it "should mixin class", ->
-    inherits(A, Root).should.be.true
+    class Root
+    class A
+      aMethod: ->
+    class B1
+      b1Method: ->
+    class B2
+      b2Method: ->
+    inherits(A, Root).should.be.equal true
     isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
-    mixin(A, B1, B2).should.be.true
+    mixin(A, B1, B2).should.be.equal true
     a = new A()
     a.should.have.property 'b1Method'
     a.should.have.property 'b2Method'
     a.should.have.property 'aMethod'
 
     isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
-    isMixinedFrom(A, B1).should.be.true "A is mixined from B1"
-    isMixinedFrom(A, B2).should.be.true "A is mixined from B2"
+    isMixinedFrom(A, B1).should.be.equal true, "A is mixined from B1"
+    isMixinedFrom(A, B2).should.be.equal true, "A is mixined from B2"
+
+  it "should first mixin class then inherits", ->
+    class Root
+    class A
+      aMethod: ->
+    class B1
+      b1Method: ->
+    class B2
+      b2Method: ->
+    mixin(A, B1, B2).should.be.equal true, 'mixin'
+    inherits(A, Root).should.be.equal true, "inherits"
+    isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
+    a = new A()
+    a.should.have.property 'b1Method'
+    a.should.have.property 'b2Method'
+    a.should.have.property 'aMethod'
+
+    isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
+    isMixinedFrom(A, B1).should.be.equal true, "A is mixined from B1"
+    isMixinedFrom(A, B2).should.be.equal true, "A is mixined from B2"
 
 
    
