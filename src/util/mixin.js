@@ -96,10 +96,12 @@ function mixin(ctor, superCtor) {
   return result;
 }
 
-module.exports = function(ctor) {
-  for (var i = 1; i < arguments.length; i++) {
-    var superCtor = arguments[i];
-    if (!mixin(ctor, superCtor)) return false;
+module.exports = function(ctor, superCtors, options) {
+  if (isFunction(superCtors))
+    return mixin(ctor, superCtors, options);
+  for (var i = 0; i < superCtors.length; i++) {
+    var superCtor = superCtors[i];
+    if (!mixin(ctor, superCtor, options)) return false;
   }
   return true;
 }

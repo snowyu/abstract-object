@@ -458,7 +458,7 @@ describe "util functions", ->
         b2Method: ->
       inherits(A, Root).should.be.equal true
       isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
-      mixin(A, B1, B2).should.be.equal true
+      mixin(A, [B1, B2]).should.be.equal true
       a = new A()
       a.should.have.property 'b1Method'
       a.should.have.property 'b2Method'
@@ -476,7 +476,7 @@ describe "util functions", ->
         b1Method: ->
       class B2
         b2Method: ->
-      mixin(A, B1, B2).should.be.equal true, 'mixin'
+      mixin(A, [B1, B2]).should.be.equal true, 'mixin'
       inherits(A, Root).should.be.equal true, "inherits"
       isInheritedFrom(A, Root).should.be.equal A, "A is inherits from Root"
       a = new A()
@@ -512,7 +512,7 @@ describe "util functions", ->
       inherits(C, Root).should.be.equal true, "C should inherits from Root"
       inherits(B1, B).should.be.equal true, "B1 should inherits from B"
       inherits(A1, A).should.be.equal true, "A1 should inherits from A"
-      mixin(B1, A1, C).should.be.equal true, 'mixin'
+      mixin(B1, [A1, C]).should.be.equal true, 'mixin'
       o = new B1()
       o.m("a", 12) # call chain: B1::m -> C::m -> A1::m -> A::m
       A::m.should.have.been.calledOnce
