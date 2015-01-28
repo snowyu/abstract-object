@@ -1,7 +1,5 @@
 AbstractObject  = require("./Object")
-util            = require("./util")
-
-inherits        = util.inherits
+inherits        = require("inherits-ex/lib/inherits")
 
 
 # RefObject with RefCount and AddRef/Release Supports.

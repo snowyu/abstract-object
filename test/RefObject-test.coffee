@@ -4,8 +4,7 @@ sinonChai       = require 'sinon-chai'
 should          = chai.should()
 AbstractObject  = require '../index'
 RefObject       = require '../RefObject'
-util            = require '../lib/util'
-inherits        = util.inherits
+inherits        = require 'inherits-ex/lib/inherits'
 setImmediate    = setImmediate || process.nextTick
 
 chai.use(sinonChai)

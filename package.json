@@ -15,7 +15,9 @@
   "scripts": {
     "test": "grunt test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "inherits-ex": "~1.0.1"
+  },
   "devDependencies": {
     "chai": "~1.10.0",
     "coffee-script": "~1.8.0",
@@ -31,15 +33,12 @@
     "grunt-mocha-test": "~0.12.4",
     "grunt-newer": "*",
     "grunt-release": "*",
-    "grunt-rev": "*",
     "grunt-saucelabs": "*",
-    "grunt-usemin": "*",
     "mocha": "~2.0.1",
     "pre-commit": "0.0.11",
     "sinon": "~1.12.2",
     "sinon-chai": "~2.6.0",
-    "source-map-support": "*",
-    "which": "^1.0.8"
+    "source-map-support": "*"
   },
   "pre-commit": [
     "test"

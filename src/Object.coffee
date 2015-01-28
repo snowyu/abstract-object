@@ -1,10 +1,10 @@
-EventEmitter  = require("events").EventEmitter
-util          = require("./util")
-
-inherits      = util.inherits
-isArray       = util.isArray
-isFunction    = util.isFunction
-isUndefined   = util.isUndefined
+EventEmitter      = require("events").EventEmitter
+inherits          = require("inherits-ex/lib/inherits")
+createObject      = require("inherits-ex/lib/createObject")
+createObjectWith  = require("inherits-ex/lib/createObjectWith")
+isArray           = require("./util/isArray")
+isFunction        = require("./util/isFunction")
+isUndefined       = require("./util/isUndefined")
 
 
 # AbstractObject with Object State Events Supports.
@@ -94,6 +94,6 @@ module.exports = class AbstractObject
   dispatchError: (error, callback)->
     return if callback and callback(error) isnt false
     @emit('error', error)
-  @create: util.createObject
-  @createWith: util.createObjectWith
+  @create: createObject
+  @createWith: createObjectWith
 

@@ -1,5 +1,4 @@
-util     = require("./util")
-inherits = util.inherits
+inherits = require("inherits-ex/lib/inherits")
 
 firstLower = (s) ->
   s[0].toLowerCase() + s.substring(1)

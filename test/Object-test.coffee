@@ -6,8 +6,7 @@ expect          = chai.expect
 #AbstractObject  = require '../index'
 AbstractObject  = require '../src/Object'
 Errors          = require '../Error'
-util            = require '../lib/util'
-inherits        = util.inherits
+inherits        = require 'inherits-ex/lib/inherits'
 setImmediate    = setImmediate || process.nextTick
 
 chai.use(sinonChai)
