@@ -1,10 +1,13 @@
-module.exports = function(ctor, superStr) {
+module.exports = function(ctor, superStr, throwError) {
   var result  =  ctor.super_ != null && ctor.super_.name === superStr;
   var checkeds = [];
   checkeds.push(ctor);
   while (!result && ((ctor = ctor.super_) != null)) {
     if (checkeds.indexOf(ctor) >= 0) {
-      throw Error("Circular inherits found!");
+      if (throwError)
+        throw new Error("Circular inherits found!");
+      else
+        return true;
     }
     checkeds.push(ctor);
     result = ctor.super_ != null && ctor.super_.name === superStr;
