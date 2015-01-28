@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
@@ -16,7 +16,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "inherits-ex": "~1.0.1"
+    "inherits-ex": "~1.0.2"
   },
   "devDependencies": {
     "chai": "~1.10.0",
