@@ -35,7 +35,7 @@ module.exports = (grunt) ->
           ui: 'bdd'
           quiet: false
           require: 'coffee-script/register'
-          #reporter: 'dot'
+          reporter: 'dot'
           check: ['src/**/*.coffee', 'test/**/*.js', 'test/**/*.coffee']
         src: ['test/**/*.coffee']
 
