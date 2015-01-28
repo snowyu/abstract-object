@@ -4,7 +4,7 @@ sinonChai       = require 'sinon-chai'
 assert          = chai.assert
 should          = chai.should()
 
-util            = require "../lib/util"
+util            = require "../src/util"
 log             = require "../src/util/log"
 
 chai.use(sinonChai)
@@ -105,6 +105,29 @@ describe "util functions", ->
       o = new A1()
       assert.equal o.rootMethod, Root::rootMethod
       assert.deepEqual getProtoChain(A1), [ 'Root', 'A', 'A1' ]
+    it "should multi-inheritances", ->
+      class C
+      class D
+      class E
+      class MyClass
+      # MyClass -> C -> D -> E
+      assert.equal util.inherits(MyClass, [C, D, E]), true
+      assert.deepEqual getProtoChain(MyClass), ['E', 'D', 'C', 'MyClass']
+    it "should multi-inheritances and void circular inherit", ->
+      class C
+      class MyClass
+      assert.equal util.inherits(C, Root), true
+
+      # MyClass -> B -> Root
+      assert.equal util.inherits(MyClass, B), true
+
+      # MyClass -> C -> B -> Root
+      assert.equal util.inherits(MyClass, C), true
+      assert.deepEqual getProtoChain(MyClass), [ 'Root', 'B', 'C', 'MyClass']
+      assert.equal util.isInheritedFrom(MyClass, C), MyClass
+      assert.equal util.isInheritedFrom(MyClass, B), C
+      assert.equal util.isInheritedFrom(MyClass, 'C'), MyClass
+      assert.equal util.isInheritedFrom(MyClass, 'B'), C
     it "test isInheritedFrom with class name", ->
       isInheritedFrom = util.isInheritedFrom
       assert.equal isInheritedFrom(A, 'Root'), A

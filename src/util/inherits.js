@@ -1,5 +1,6 @@
-var isInheritedFrom = require('./isInheritedFrom');
-var newPrototype = require('./newPrototype');
+var isFunction        = require('./isFunction');
+var isInheritedFrom   = require('./isInheritedFrom');
+var inheritsDirectly  = require('./inheritsDirectly');
 /**
  * Inherit the prototype methods from one constructor into another.
  *
@@ -14,7 +15,7 @@ var newPrototype = require('./newPrototype');
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-module.exports = function(ctor, superCtor) {
+function inherits(ctor, superCtor) {
   var v  = ctor.super_;
   var mixinCtor = ctor.mixinCtor_;
   if (mixinCtor && v === mixinCtor) {
@@ -23,15 +24,11 @@ module.exports = function(ctor, superCtor) {
   }
   var result = false;
   if (!isInheritedFrom(ctor, superCtor)) {
-    ctor.super_ = superCtor;
-    ctor.__super__ = superCtor.prototype; //for coffeeScirpt super keyword.
-    ctor.prototype = newPrototype(superCtor, ctor);
-    while (v != null) {
+    inheritsDirectly(ctor, superCtor);
+    while (v != null && (superCtor !== v)) {
       ctor = superCtor;
       superCtor = v;
-      ctor.super_ = superCtor;
-      ctor.__super__ = superCtor.prototype; //for coffeeScirpt super keyword.
-      ctor.prototype = newPrototype(superCtor, ctor);
+      inheritsDirectly(ctor, superCtor);
       v = ctor.super_;
     }
     result = true;
@@ -39,3 +36,11 @@ module.exports = function(ctor, superCtor) {
   return result;
 }
 
+module.exports = function(ctor, superCtors) {
+  if (isFunction(superCtors))
+    return inherits(ctor, superCtors);
+  for (var i = superCtors.length - 1; i >= 0; i--) {
+    if (!inherits(ctor, superCtors[i])) return false;
+  }
+  return true;
+}
