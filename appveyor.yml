@@ -17,7 +17,6 @@ install:
   - ps: Update-NodeJsInstallation (Get-NodeJsLatestBuild $env:nodejs_version)
   # Typical npm stuff.
   - npm/.bin/npm install
-  - npm/.bin/npm run rebuild-tests
   - npm/.bin/npm install -g grunt-cli
 
 # Post-install test scripts.
