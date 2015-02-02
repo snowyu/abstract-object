@@ -35,7 +35,7 @@
     "grunt-release": "*",
     "grunt-saucelabs": "*",
     "mocha": "~2.0.1",
-    "pre-commit": "0.0.11",
+    "pre-commit": "~1.0.1",
     "sinon": "~1.12.2",
     "sinon-chai": "~2.6.0",
     "source-map-support": "*"
