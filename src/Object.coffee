@@ -2,10 +2,10 @@ EventEmitter      = require("events").EventEmitter
 inherits          = require("inherits-ex/lib/inherits")
 createObject      = require("inherits-ex/lib/createObject")
 createObjectWith  = require("inherits-ex/lib/createObjectWith")
-isArray           = require("./util/isArray")
-isFunction        = require("./util/isFunction")
-isUndefined       = require("./util/isUndefined")
-
+isArray           = require("util-ex/lib/is/type/array")
+isFunction        = require("util-ex/lib/is/type/function")
+isUndefined       = require("util-ex/lib/is/type/undefined")
+defineProperty    = require("util-ex/lib/defineProperty")
 
 # AbstractObject with Object State Events Supports.
 # class should overwrite the init, final methods.
@@ -34,11 +34,10 @@ OBJECT_STATES_STR = ["destroying", "initing", "inited"]
 module.exports = class AbstractObject
   inherits AbstractObject, EventEmitter
   OBJECT_STATES: OBJECT_STATES
-  @::__defineGetter__ "Class", ->
-    return @__proto__.constructor
-  @.prototype.__defineGetter__ "objectState", ->
-    vState = @_objectState_
-    if not vState? then "destroyed" else OBJECT_STATES_STR[vState]
+  defineProperty @::, "objectState", null,
+    get:->
+      vState = @_objectState_
+      if not vState? then "destroyed" else OBJECT_STATES_STR[vState]
   for vStateName, vState of OBJECT_STATES
     s = 'is'+ vStateName[0].toUpperCase() + vStateName.slice(1)
     @::[s] = ((aState)-> 
@@ -70,6 +69,7 @@ module.exports = class AbstractObject
       @final.apply @, arguments
   constructor: ->
     #@setObjectState "initing"
+    defineProperty @, '_objectState_', null
     @changeObjectState OBJECT_STATES.initing
     @setMaxListeners(Infinity)
     if @initialize.apply(@, arguments) isnt true
