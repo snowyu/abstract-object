@@ -1,6 +1,6 @@
 AbstractObject  = require("./Object")
 inherits        = require("inherits-ex/lib/inherits")
-
+defineProperty  = require("util-ex/lib/defineProperty")
 
 # RefObject with RefCount and AddRef/Release Supports.
 #
@@ -14,7 +14,8 @@ module.exports = class RefObject
   inherits RefObject, AbstractObject
   # initialization method
   initialize: ->
-    @RefCount = 0
+    #@RefCount = 0
+    defineProperty @, 'RefCount', 0
     if @init
       console.error "init method is deprecated, pls use initialize instead"
       RefObject::init = (->) unless RefObject::init
