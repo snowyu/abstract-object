@@ -1,3 +1,1 @@
-module.exports = function(arg) {
-  return arg === void 0;
-}
+module.exports = require('util-ex/lib/is/type/undefined'); 

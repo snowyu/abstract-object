@@ -16,7 +16,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "inherits-ex": "~1.0.2"
+    "inherits-ex": "~1.0.5",
+    "util-ex": "~0.2.3"
   },
   "devDependencies": {
     "chai": "~1.10.0",

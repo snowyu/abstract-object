@@ -1,3 +1,1 @@
-module.exports = function(arg) {
-  return typeof arg === 'number';
-}
+module.exports = require('util-ex/lib/is/type/number');

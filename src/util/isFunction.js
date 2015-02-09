@@ -1,3 +1,1 @@
-module.exports = function isFunction(arg) {
-  return typeof arg === 'function';
-}
+module.exports = require('util-ex/lib/is/type/function');

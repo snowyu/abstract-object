@@ -24,6 +24,10 @@ describe "AbstractObject", ->
       obj = AbstractObject.create(TestObject)
       obj.on 'inited', ->
         done()
+    it "should have Class property", ->
+      class TestObject
+        inherits TestObject, AbstractObject
+      TestObject::should.have.property 'Class', TestObject
     describe "Object State methods", ->
       it '.isIniting()', (done)->
           class TestObject

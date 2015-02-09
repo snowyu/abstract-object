@@ -1,1 +1,1 @@
-module.exports = Array.isArray
+module.exports = require('util-ex/lib/is/type/array')

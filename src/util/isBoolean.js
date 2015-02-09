@@ -1,4 +1,1 @@
-module.exports = function(arg) {
-  return typeof arg === 'boolean';
-}
-
+module.exports = require('util-ex/lib/is/type/boolean');

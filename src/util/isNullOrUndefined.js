@@ -1,3 +1,1 @@
-module.exports = function(arg) {
-  return arg == null;
-}
+module.exports = require('util-ex/lib/is/type/null-or-undefined');
