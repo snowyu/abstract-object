@@ -1,4 +1,4 @@
-EventEmitter      = require("events").EventEmitter
+EventEmitter      = require("events-ex")
 inherits          = require("inherits-ex/lib/inherits")
 createObject      = require("inherits-ex/lib/createObject")
 createObjectWith  = require("inherits-ex/lib/createObjectWith")
