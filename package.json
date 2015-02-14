@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "chai": "~1.10.0",
-    "coffee-script": "~1.8.0",
     "connect-livereload": "*",
     "grunt": "*",
     "grunt-contrib-clean": "*",
