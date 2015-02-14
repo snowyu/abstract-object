@@ -1,3 +1,3 @@
-var AbstractObject = require("./lib/Object")
+var AbstractObject = require('./lib/abstract-object')
 
 module.exports = AbstractObject 

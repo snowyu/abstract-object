@@ -1,4 +1,4 @@
-var RefObject = require("./lib/RefObject")
+var RefObject = require("./lib/ref-object")
 
 
 module.exports = RefObject 

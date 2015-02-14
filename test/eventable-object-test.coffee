@@ -4,14 +4,14 @@ sinonChai       = require 'sinon-chai'
 should          = chai.should()
 expect          = chai.expect
 #AbstractObject  = require '../index'
-AbstractObject  = require '../src/Object'
+AbstractObject  = require '../src/eventable-object'
 Errors          = require '../Error'
 inherits        = require 'inherits-ex/lib/inherits'
 setImmediate    = setImmediate || process.nextTick
 
 chai.use(sinonChai)
 
-describe "AbstractObject", ->
+describe "eventable AbstractObject", ->
     #before (done)->
     #after (done)->
     it "AbstractObject constructor should be called", (done)->

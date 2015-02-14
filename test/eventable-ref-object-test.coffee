@@ -2,14 +2,14 @@ chai            = require 'chai'
 sinon           = require 'sinon'
 sinonChai       = require 'sinon-chai'
 should          = chai.should()
-AbstractObject  = require '../index'
-RefObject       = require '../RefObject'
+AbstractObject  = require '../src/abstract-object'
+RefObject       = require '../src/eventable-ref-object'
 inherits        = require 'inherits-ex/lib/inherits'
 setImmediate    = setImmediate || process.nextTick
 
 chai.use(sinonChai)
 
-describe "RefObject", ->
+describe "eventable RefObject", ->
     class TestObject
       inherits TestObject, RefObject
       finalize: sinon.spy -> RefObject::finalize.apply @, arguments
