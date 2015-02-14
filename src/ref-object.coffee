@@ -1,4 +1,4 @@
-AbstractObject  = require("./Object")
+AbstractObject  = require("./abstract-object")
 inherits        = require("inherits-ex/lib/inherits")
 defineProperty  = require("util-ex/lib/defineProperty")
 
