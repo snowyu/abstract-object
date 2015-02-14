@@ -1,8 +1,31 @@
 ### AbtractObject [![Build Status](https://img.shields.io/travis/snowyu/abstract-object/master.png)](http://travis-ci.org/snowyu/abstract-object) [![npm](https://img.shields.io/npm/v/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![downloads](https://img.shields.io/npm/dm/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![license](https://img.shields.io/npm/l/abstract-object.svg)](https://npmjs.org/package/abstract-object) 
 
-AbstractObject with Object State Events Supports and `free` method provides.
+AbstractObject with Object State Supports and `free` method provides.
 
 The derived class should overwrite the `initialize` and `finalize` methods.
+
+
+# Changes
+
+## V2.x
+
+* **<broken change>** separate eventable from AbstractObject
+  + the new EventableObject can be as AbstractObject@v1.x
+* **<broken change>** separate eventable from RefObject too
+  + the new EventableRefObject can be as RefObject@v1.x
++ add the eventable function to eventable any class('abstract-object/eventable').
+  * use the eventable plugin([events-ex](https://github.com/snowyu/events-ex.js)) to implement eventable object.
+- move all util functions to [util-ex](https://github.com/snowyu/util-ex.js)
+- move enhanced inheritance Functions to [inherits-ex](https://github.com/snowyu/inherits-ex.js).
+- move AbstractError to [abstract-error](https://github.com/snowyu/abstract-error.js)
+
+## V1.x
+
+* AbstractObject inherits from EventEmitter.
+* RefObject inherits from AbstractObject
+* AbstractError
+
+# AbstractObject
 
 * Methods:
   * `create`(class, ...): the `create` class method uses to create a new object instance(the util.createObject is the same function).
@@ -23,21 +46,24 @@ The derived class should overwrite the `initialize` and `finalize` methods.
     * `...`: the free(destroy)'s arguments should be passed into final method.
   * `free`(...): free the class instance.
     * `...`: optional arguments will be passed into final method to process.
-  * `dispatch`(event, args[, callback]): dispath an event or callback
-    * `event`: the event name
-    * `args`: the args are passed to event or callback
-    * `callback`: optional, it will not dispatch event if the callback is exists, unless the callback return false.
-  * `dispatchError`(error[, callback]):
-    * `error`: the error instance.
-    * `callback`: optional, it will not dispatch `'error'` event if the callback is exists, unless the callback return false.
   * `isIniting`(), `isInited`(),`isDestroying`(), `isDestroyed`() object state testing methods:
     * to test object state
 
-* Events:
-  * `'initing'`: emit before the initialize method
-  * `'inited'`: emit after the initialize method
-  * `'destroying'`: emit before the finalize method
-  * `'destroyed'`: emit after the finalize method
+
+* only for EventableObject:
+  * Methods:
+    * `dispatch`(event, args[, callback]): dispath an event or callback
+      * `event`: the event name
+      * `args`: the args are passed to event or callback
+      * `callback`: optional, it will not dispatch event if the callback is exists, unless the callback return false.
+    * `dispatchError`(error[, callback]):
+      * `error`: the error instance.
+      * `callback`: optional, it will not dispatch `'error'` event if the callback is exists, unless the callback return false.
+  * Events:
+    * `'initing'`: emit before the initialize method
+    * `'inited'`: emit after the initialize method
+    * `'destroying'`: emit before the finalize method
+    * `'destroyed'`: emit after the finalize method
 
 
 # RefObject
@@ -45,9 +71,9 @@ The derived class should overwrite the `initialize` and `finalize` methods.
 The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddRef/Release` Supports.
 
 * methods:
-  * `release`/`free`: Decrements reference count for this instance. 
+  * `release()`/`free()`: Decrements reference count for this instance. 
     If it is becoming less than 0, the object would be (self) destroyed. 
-  * `addRef`: Increments the reference count for this instance
+  * `addRef()`: Increments the reference count for this instance
     and returns the new reference count.
 
 
@@ -56,7 +82,7 @@ The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddR
 ```coffee
 AbstractObject = require('abstract-object')
 RefObject = require('abstract-object/RefObject')
-inherits = require('abstract-object/lib/util/inherits')
+inherits = require('inherits-ex')
 createObject = AbstractObject.createObject
 
 class MyObject
@@ -87,7 +113,7 @@ the javascript:
 
 var AbstractObject = require('abstract-object')
 var RefObject = require('abstract-object/RefObject')
-var util = require('abstract-object/lib/util')
+var inherits = require('inherits-ex')
 var createObject = AbstractObject.createObject
 
 //if you do not wanna to use the 'AbstractObject.create'(createObject):
@@ -99,12 +125,12 @@ var MyObject = function() {
 var MyObject = function(){}
 
 
-util.inherits(MyObject, RefObject)
+inherits(MyObject, RefObject)
 
 
 MyObject.prototype.initialize = function(a,b) {
   //super call
-  MyObject.__super__.initialize.call(this);
+  MyObject.__super__.initialize.call(this)
   this.a = a
   this.b = b
 }
@@ -116,6 +142,8 @@ var myObj = new MyObject(1,2)
 ```
 
 # AbstractError Classes
+
+Moved to [abstract-error](https://github.com/snowyu/abstract-error.js).
 
 ## AbstractError
 
@@ -201,3 +229,7 @@ assert.equal(err.code, 10000)
 # Enhanced Inheritance Functions
 
 Moved to [inherits-ex](https://github.com/snowyu/inherits-ex.js).
+
+# Util Functions
+
+Moved to [util-ex](https://github.com/snowyu/util-ex.js).
