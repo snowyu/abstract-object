@@ -1,4 +1,4 @@
-### AbtractObject [![Build Status](https://img.shields.io/travis/snowyu/abstract-object/master.png)](http://travis-ci.org/snowyu/abstract-object) [![npm](https://img.shields.io/npm/v/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![downloads](https://img.shields.io/npm/dm/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![license](https://img.shields.io/npm/l/abstract-object.svg)](https://npmjs.org/package/abstract-object) 
+### AbtractObject [![Build Status](https://img.shields.io/travis/snowyu/abstract-object/master.png)](http://travis-ci.org/snowyu/abstract-object) [![npm](https://img.shields.io/npm/v/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![downloads](https://img.shields.io/npm/dm/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![license](https://img.shields.io/npm/l/abstract-object.svg)](https://npmjs.org/package/abstract-object)
 
 AbstractObject with Object State Supports and `free` method provides.
 
@@ -10,7 +10,7 @@ The derived class should overwrite the `initialize` and `finalize` methods.
 ## V2.1.x
 
 + add the state-able ability to any class.
-- move RefObject to [ref-object](https://github.com/snowyu/ref-object.js)
+- **<broken change>**move RefObject to [ref-object](https://github.com/snowyu/ref-object.js)
 
 ## V2.x
 
@@ -76,8 +76,8 @@ The derived class should overwrite the `initialize` and `finalize` methods.
 The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddRef/Release` Supports.
 
 * methods:
-  * `release()`/`free()`: Decrements reference count for this instance. 
-    If it is becoming less than 0, the object would be (self) destroyed. 
+  * `release()`/`free()`: Decrements reference count for this instance.
+    If it is becoming less than 0, the object would be (self) destroyed.
   * `addRef()`: Increments the reference count for this instance
     and returns the new reference count.
 
