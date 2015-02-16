@@ -7,6 +7,11 @@ The derived class should overwrite the `initialize` and `finalize` methods.
 
 # Changes
 
+## V2.1.x
+
++ add the state-able ability to any class.
+- move RefObject to [ref-object](https://github.com/snowyu/ref-object.js)
+
 ## V2.x
 
 * **<broken change>** separate eventable from AbstractObject
