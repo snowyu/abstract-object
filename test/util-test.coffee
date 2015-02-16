@@ -31,14 +31,14 @@ describe "util functions", ->
 
     it "should be empty function", ->
       emptyFunc = ->
-      isEmpty(emptyFunc).should.be.true "emptyFunc"
+      isEmpty(emptyFunc).should.be.equal true, "emptyFunc"
       emptyFunc = (abc, ase)->
-      isEmpty(emptyFunc).should.be.true "emptyFunc2"
+      isEmpty(emptyFunc).should.be.equal true, "emptyFunc2"
       isEmptyFunction("function(arg1, arg2, arg3){\n}").should.be.true
       isEmptyFunction("function(arg1, arg2, arg3){\n;}").should.be.true
       isEmptyFunction("function   asFn  (arg1, arg2, arg3){\n\n;}").should.be.true
       isEmptyFunction("function(arg1, arg2, arg3){abs;}").should.not.be.true
-      
+
   describe "inject", ->
     inject = util.inject
     it "should inject a function before execution", ->
@@ -71,7 +71,7 @@ describe "util functions", ->
       runOrg = sinon.spy (a,b,c)->[a,b,c]
       onAfter = sinon.spy (a,b,c, result, isDenied)->
         a.should.be.equal 1
-        b.should.be.equal "b" 
+        b.should.be.equal "b"
         c.should.be.equal 3
         result.should.be.deep.equal [1,"b",3]
         isDenied.should.be.false
@@ -86,7 +86,7 @@ describe "util functions", ->
       runOrg = sinon.spy (a,b,c)->[a,b,c]
       onAfter = sinon.spy (a,b,c, result, isDenied)->
         a.should.be.equal 1
-        b.should.be.equal "b" 
+        b.should.be.equal "b"
         c.should.be.equal 3
         result.should.be.deep.equal [1,"b",3]
         isDenied.should.be.false
@@ -102,7 +102,7 @@ describe "util functions", ->
       onBefore = sinon.spy()
       onAfter = sinon.spy (a,b,c, result, isDenied)->
         a.should.be.equal 1
-        b.should.be.equal "b" 
+        b.should.be.equal "b"
         c.should.be.equal 3
         result.should.be.deep.equal [1,"b",3]
         isDenied.should.be.false
@@ -221,5 +221,3 @@ describe "util functions", ->
       third = {c:4}
       extend(org, add, third, {d:5, b:0}).should.be.equal org
       org.should.be.deep.equal {a:3, b:0, c:4, d:5}
-
-
