@@ -10,16 +10,23 @@
 #   * destroyed: emit after the final method
 ###
 
-isArray           = require("util-ex/lib/is/type/array")
-isFunction        = require("util-ex/lib/is/type/function")
-isUndefined       = require("util-ex/lib/is/type/undefined")
+extend            = require 'util-ex/lib/_extend'
+isArray           = require 'util-ex/lib/is/type/array'
+isFunction        = require 'util-ex/lib/is/type/function'
+isUndefined       = require 'util-ex/lib/is/type/undefined'
 eventable         = require 'events-ex/eventable'
 AbstractObject    = require './abstract-object'
 OBJECT_STATES_STR = AbstractObject.OBJECT_STATES_STR
 
-module.exports = (aClass)->
-  eventable aClass, methods:
+module.exports = (aClass, aOptions)->
+  aOptions = {} unless aOptions
+  aOptions.methods = {} unless aOptions.methods
+  extend aOptions.methods,
     # override methods:
+    initialize: ->
+      self = @self
+      self.setMaxListeners(Infinity)
+      @super.apply self, arguments
     setObjectState: (value, emitted = true)->
       self= @self
       @super.call(self, value)
@@ -47,4 +54,5 @@ module.exports = (aClass)->
     dispatchError: (error, callback)->
       return if callback and callback(error) isnt false
       @emit('error', error)
+  eventable aClass, aOptions
 

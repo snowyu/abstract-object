@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "abstract-error": "^1.0.1",
-    "custom-ability": "~1.1.1",
-    "events-ex": "~0.9.8",
+    "custom-ability": "~1.2.2",
+    "events-ex": "~1.1.0",
     "inherits-ex": "~1.0.6",
     "util-ex": "~0.2.8"
   },

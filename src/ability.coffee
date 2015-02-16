@@ -25,7 +25,7 @@ OBJECT_STATES =
 
 OBJECT_STATES_STR = ['destroying', 'initing', 'inited']
 
-class AbstractObject
+class Stateable
   OBJECT_STATES: OBJECT_STATES
   @OBJECT_STATES_STR: OBJECT_STATES_STR
   defineProperty @::, 'objectState', null,
@@ -48,19 +48,18 @@ class AbstractObject
   initialize: ->
     if isFunction @init
       console.error 'init method is deprecated, pls use initialize instead'
-      AbstractObject::init = (->) unless AbstractObject::init
+      Stateable::init = (->) unless Stateable::init
       @init.apply @, arguments
   # abstract finalization method
   finalize: ->
     if isFunction @final
       console.error 'final method is deprecated, pls use finalize instead'
-      AbstractObject::final = (->) unless AbstractObject::final
+      Stateable::final = (->) unless Stateable::final
       @final.apply @, arguments
   _constructor: ->
     #@setObjectState 'initing'
     defineProperty @, '_objectState_', null
     @changeObjectState OBJECT_STATES.initing
-    @setMaxListeners(Infinity)
     if @initialize.apply(@, arguments) isnt true
       @changeObjectState OBJECT_STATES.inited
   destroy: ->
@@ -73,4 +72,4 @@ class AbstractObject
   @create: createObject
   @createWith: createObjectWith
 
-module.exports = customAbility AbstractObject, 'objectState'
+module.exports = customAbility Stateable, 'objectState'
