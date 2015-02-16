@@ -30,6 +30,19 @@ The derived class should overwrite the `initialize` and `finalize` methods.
 * RefObject inherits from AbstractObject
 * AbstractError
 
+# State-able Ability(V2.1.x)
+
+add the Object State Supports and `free` method to your class directly.
+
+```coffee
+stateable = require 'abstract-object/ability'
+
+module.exports = class AbstractObject
+  stateable AbstractObject
+
+```
+
+
 # AbstractObject
 
 * Methods:
