@@ -1,13 +1,14 @@
 {
   "name": "abstract-object",
   "version": "2.0.1",
-  "description": "AbstractObject with Object State Events Support, RefObject with RefCount and AddRef/Release Support.",
+  "description": "AbstractObject with Object State Events Support",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
   "files": [
     "README.md",
     "LICENSE-MIT",
     "*.js",
+    "*.coffee",
     "test",
     "src",
     "lib"
@@ -17,29 +18,27 @@
   },
   "dependencies": {
     "abstract-error": "^1.0.1",
+    "custom-ability": "~1.1.1",
     "events-ex": "~0.9.8",
     "inherits-ex": "~1.0.6",
     "util-ex": "~0.2.8"
   },
   "devDependencies": {
-    "chai": "~1.10.0",
+    "chai": "~2.0.0",
     "connect-livereload": "*",
     "grunt": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-coffee": "*",
-    "grunt-contrib-concat": "*",
     "grunt-contrib-copy": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "grunt-mocha-test": "~0.12.4",
+    "grunt-mocha-test": "~0.12.7",
     "grunt-newer": "*",
     "grunt-release": "*",
     "grunt-saucelabs": "*",
-    "mocha": "~2.0.1",
-    "pre-commit": "~1.0.1",
+    "mocha": "~2.1.0",
+    "pre-commit": "~1.0.4",
     "sinon": "~1.12.2",
-    "sinon-chai": "~2.6.0",
+    "sinon-chai": "~2.7.0",
     "source-map-support": "*"
   },
   "pre-commit": [
@@ -50,15 +49,15 @@
     "url": "https://github.com/snowyu/abstract-object"
   },
   "keywords": [
+    "ability",
     "abstract",
     "object",
     "class",
     "model",
     "prototype",
-    "event",
-    "reference",
-    "addref",
-    "refcount"
+    "state",
+    "stateful",
+    "event"
   ],
   "author": {
     "name": "Riceball LEE",
