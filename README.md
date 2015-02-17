@@ -10,7 +10,12 @@ The derived class should overwrite the `initialize` and `finalize` methods.
 ## V2.1.x
 
 + add the state-able ability to any class.
-- **<broken change>**move RefObject to [ref-object](https://github.com/snowyu/ref-object.js)
+- **<broken change>** move RefObject to [ref-object](https://github.com/snowyu/ref-object.js)
+* decoupled the abstract-object completely.
+* All parts can be used individually.
+  * stateable = require('abstract-object/ability')
+  * eventable = require('events-ex/eventable')
+  * refCountable = require('ref-object/ability')
 
 ## V2.x
 
