@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "AbstractObject with Object State Events Support",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
