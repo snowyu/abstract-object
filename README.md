@@ -106,14 +106,16 @@ The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddR
 
 ```coffee
 AbstractObject = require('abstract-object')
-RefObject = require('abstract-object/RefObject')
 inherits = require('inherits-ex')
-createObject = AbstractObject.createObject
+createObject = AbstractObject.create
+#or createObject = require('inherits-ex/lib/createObject')
 
 class MyObject
-  inherits MyObject, RefObject
-  initialize: (@a,@b)->
-    super
+  inherits MyObject, AbstractObject
+  initialize: (@a, @b)->
+    @cache = {}
+  finalize: ->
+    @cache = null
 
 myObj = createObject(MyObject, 1, 2)
 
@@ -127,8 +129,9 @@ class MyObject
     # must call super method here:
     super
   initialize: (@a,@b)->
-    # must call super method here for RefObject initialization:
-    super
+    @cache = {}
+  finalize: ->
+    @cache = null
 
 ```
 
@@ -137,16 +140,17 @@ the javascript:
 ```js
 
 var AbstractObject = require('abstract-object')
-var RefObject = require('abstract-object/RefObject')
+var RefObject = require('ref-object')
 var inherits = require('inherits-ex')
-var createObject = AbstractObject.createObject
+var createObject = AbstractObject.create
+//or var createObject = require('inherits-ex/lib/createObject')
 
 //if you do not wanna to use the 'AbstractObject.create'(createObject):
 var MyObject = function() {
   //super call
   MyObject.__super__.constructor.apply(this, arguments);
 }
-// or, this MUST use 'AbstractObject.create'
+// or, this MUST use the 'AbstractObject.create'(createObject)
 var MyObject = function(){}
 
 
@@ -154,12 +158,14 @@ inherits(MyObject, RefObject)
 
 
 MyObject.prototype.initialize = function(a,b) {
-  //super call
-  MyObject.__super__.initialize.call(this)
   this.a = a
   this.b = b
+  this.cache = {}
 }
 
+MyObject.prototype.finalize = function() {
+  this.cache = null
+}
 
 var myObj = createObject(MyObject, 1, 2)
 //or this,  must overwrite the constructor and call the super constructor.
