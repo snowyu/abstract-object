@@ -91,6 +91,8 @@ module.exports = class AbstractObject
 
 # RefObject
 
+RefObject has moved to [ref-object](https://github.com/snowyu/ref-object.js)
+
 The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddRef/Release` Supports.
 
 * methods:
