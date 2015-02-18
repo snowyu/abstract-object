@@ -5,7 +5,6 @@ should          = chai.should()
 expect          = chai.expect
 #AbstractObject  = require '../index'
 AbstractObject  = require '../src/eventable-object'
-Errors          = require '../Error'
 inherits        = require 'inherits-ex/lib/inherits'
 setImmediate    = setImmediate || process.nextTick
 
@@ -132,7 +131,7 @@ describe "eventable AbstractObject", ->
         obj.should.have.property 'second', '321'
         obj.should.have.property 'third', 456
     describe ".dispatchError", ->
-      NotFoundError = Errors.NotFoundError
+      NotFoundError = Error
       err = new NotFoundError('FallingError')
       class TestObject
         inherits TestObject, AbstractObject
