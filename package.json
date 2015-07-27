@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "AbstractObject with Object State Events Support",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./index",
@@ -17,7 +17,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "custom-ability": "^1.4.0",
+    "custom-ability": "^1.4.2",
     "events-ex": "^1.1.5",
     "inherits-ex": "^1.1.2",
     "util-ex": "^0.3.10"
