@@ -12,9 +12,9 @@
 
 eventable         = require 'events-ex/eventable'
 addionalOptions   = require './eventable-options'
+hasAbilityOnParent= require 'custom-ability/lib/has-ability-on-parent'
 
 module.exports = (aClass, aOptions)->
-  vAbilities = aClass::$abilities
-  aOptions = addionalOptions(aOptions) unless vAbilities and vAbilities.Eventable
+  aOptions = addionalOptions(aOptions) unless hasAbilityOnParent aClass, 'Eventable'
   eventable aClass, aOptions
 
