@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/empty-function');
+export {empty-function} from 'util-ex'
+export default empty-function;

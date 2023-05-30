@@ -1,2 +1,3 @@
-module.exports = require('util-ex/lib/_extend');
- 
+export {_extend} from 'util-ex'
+export default _extend;
+

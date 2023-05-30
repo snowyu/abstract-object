@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/boolean');
+export {isBoolean} from 'util-ex'
+export default isBoolean;

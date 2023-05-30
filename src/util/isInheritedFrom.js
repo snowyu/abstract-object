@@ -1,3 +1,4 @@
-module.exports = require("inherits-ex/lib/isInheritedFrom")
+export {isInheritedFrom} from 'inherits-ex'
+export default isInheritedFrom
 
 

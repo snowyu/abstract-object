@@ -1,3 +1,4 @@
-module.exports = require("inherits-ex/lib/isMixinedFromStr")
+export {isMixinedFromStr} from 'inherits-ex'
+export default isMixinedFromStr
 
 

@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/regexp');
+export {isRegexp} from 'util-ex'
+export default isRegexp;

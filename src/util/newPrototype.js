@@ -1,2 +1,3 @@
-module.exports = require("inherits-ex/lib/newPrototype")
+export {newPrototype} from 'inherits-ex'
+export default newPrototype
 

@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/date');
+export {isDate} from 'util-ex'
+export default isDate;

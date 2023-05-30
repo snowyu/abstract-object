@@ -1,4 +1,5 @@
-module.exports = require("inherits-ex/lib/isInheritedFromStr")
+export {isInheritedFromStr} from 'inherits-ex'
+export default isInheritedFromStr
 
 
 

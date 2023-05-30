@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/arguments');
+export {isArguments} from 'util-ex'
+export default isArguments;

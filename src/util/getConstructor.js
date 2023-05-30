@@ -1,4 +1,5 @@
-module.exports = require("inherits-ex/lib/getConstructor")
+export {getConstructor} from 'inherits-ex'
+export default getConstructor
 
 
 

@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/object'); 
+export {isObject} from 'util-ex'
+export default isObject;

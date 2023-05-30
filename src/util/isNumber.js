@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/number');
+export {isNumber} from 'util-ex'
+export default isNumber;

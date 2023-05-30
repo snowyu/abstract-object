@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/empty');
+export {empty} from 'util-ex'
+export default empty;

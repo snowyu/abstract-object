@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/array')
+export {isArray} from 'util-ex'
+export default isArray

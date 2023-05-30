@@ -1,2 +1,3 @@
-module.exports = require("inherits-ex/lib/mixin")
+export {mixin} from 'inherits-ex'
+export default mixin
 

@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/inject')
+export {inject} from 'util-ex'
+export default inject

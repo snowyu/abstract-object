@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/undefined'); 
+export {isUndefined} from 'util-ex'
+export default isUndefined;

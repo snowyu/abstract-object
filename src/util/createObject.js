@@ -1,1 +1,2 @@
-module.exports = require("inherits-ex/lib/createObject")
+export {createObject} from 'inherits-ex'
+export default createObject

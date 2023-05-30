@@ -1,2 +1,3 @@
-module.exports = require("inherits-ex/lib/inheritsObject")
+export {inheritsObject} from 'inherits-ex'
+export default inheritsObject
 

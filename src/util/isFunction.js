@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/function');
+export {isFunction} from 'util-ex'
+export default isFunction;

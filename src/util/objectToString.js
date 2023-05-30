@@ -1,3 +1,3 @@
-module.exports = function objectToString(o) {
-  return Object.prototype.toString.call(o);
-}
+export {objectToString} from 'inherits-ex'
+export default objectToString
+

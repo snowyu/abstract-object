@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/null-or-undefined');
+export {isNullOrUndefined} from 'util-ex'
+export default isNullOrUndefined;

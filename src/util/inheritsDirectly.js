@@ -1,2 +1,3 @@
-module.exports = require("inherits-ex/lib/inheritsDirectly")
+export {inheritsDirectly} from 'inherits-ex'
+export default inheritsDirectly
 

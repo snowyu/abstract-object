@@ -1,1 +1,1 @@
-module.exports = require('util-ex')
+export * from 'util-ex'

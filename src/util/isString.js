@@ -1,1 +1,2 @@
-module.exports = require('util-ex/lib/is/type/string');
+export {isString} from 'util-ex'
+export default isString;
