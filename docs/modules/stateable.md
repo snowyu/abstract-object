@@ -40,7 +40,7 @@ Renames and re-exports [stateable](stateable.md#stateable)
 
 #### Defined in
 
-[src/stateable.js:7](https://github.com/snowyu/abstract-object/blob/5cbd886/src/stateable.js#L7)
+[src/stateable.js:7](https://github.com/snowyu/abstract-object/blob/5647f42/src/stateable.js#L7)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[src/stateable.js:14](https://github.com/snowyu/abstract-object/blob/5cbd886/src/stateable.js#L14)
+[src/stateable.js:14](https://github.com/snowyu/abstract-object/blob/5647f42/src/stateable.js#L14)
 
 ## Functions
 

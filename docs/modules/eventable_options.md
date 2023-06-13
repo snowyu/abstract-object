@@ -26,11 +26,11 @@ Renames and re-exports [eventableOptions](eventable_options.md#eventableoptions)
 
 ### MAX\_LISTENERS
 
-• `Const` **MAX\_LISTENERS**: ``null``
+• `Const` **MAX\_LISTENERS**: `number` = `Number.MAX_SAFE_INTEGER`
 
 #### Defined in
 
-[src/eventable-options.js:5](https://github.com/snowyu/abstract-object/blob/5cbd886/src/eventable-options.js#L5)
+[src/eventable-options.js:4](https://github.com/snowyu/abstract-object/blob/5647f42/src/eventable-options.js#L4)
 
 ## Functions
 
@@ -55,4 +55,4 @@ Renames and re-exports [eventableOptions](eventable_options.md#eventableoptions)
 
 #### Defined in
 
-[src/eventable-options.js:18](https://github.com/snowyu/abstract-object/blob/5cbd886/src/eventable-options.js#L18)
+[src/eventable-options.js:17](https://github.com/snowyu/abstract-object/blob/5647f42/src/eventable-options.js#L17)
