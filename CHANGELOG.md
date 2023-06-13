@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0-alpha.3](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2023-06-13)
+
+
+### Bug Fixes
+
+* **ts:** ts type error ([5647f42](https://github.com/snowyu/abstract-object/commit/5647f423585b4936b4df0919703c7667daebfad4))
+
 ## [3.0.0-alpha.2](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.1...v3.0.0-alpha.2) (2023-06-13)
 
 
