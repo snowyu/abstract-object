@@ -1,7 +1,8 @@
 import {extend, isArray, isFunction, isUndefined} from 'util-ex'
 import {OBJECT_STATES_STR} from './stateable'
 
-export let MAX_LISTENERS = 2e308
+// eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+export const MAX_LISTENERS = 2e308
 
 export function eventableOptions(aOptions) {
   const result = {methods: {}, required: ['setMaxListeners', 'emit']}
@@ -22,14 +23,14 @@ export function eventableOptions(aOptions) {
     initialize() {
       const self = this.self
       self.setMaxListeners(maxListeners)
-      return this["super"].apply(self, arguments)
+      return this.super.apply(self, arguments)
     },
     setObjectState(value, emitted) {
       if (emitted == null) {
         emitted = true
       }
       const self = this.self
-      this["super"].call(self, value)
+      this.super(value)
       if (emitted) {
         self.emit(value, self)
       }
@@ -39,7 +40,7 @@ export function eventableOptions(aOptions) {
         emitted = true
       }
       const self = this.self
-      this["super"].call(self, value)
+      this.super(value)
       if (emitted) {
         if (value == null) {
           return self.emit("destroyed", self)

@@ -11,8 +11,9 @@
  */
 
 import {eventable as _eventable} from 'events-ex'
-import additionalOptions from './eventable-options'
 import {hasAbilityOnParent} from 'custom-ability'
+
+import additionalOptions from './eventable-options'
 
 export function eventable(aClass, aOptions) {
   if (!hasAbilityOnParent(aClass, 'Eventable')) {

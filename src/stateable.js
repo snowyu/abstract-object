@@ -20,7 +20,7 @@ Stateable.prototype.OBJECT_STATES = OBJECT_STATES
 Stateable.OBJECT_STATES_STR = OBJECT_STATES_STR
 
 defineProperty(Stateable.prototype, 'objectState', null, {
-  get: function() {
+  get() {
     const vState = this._objectState_
     if (vState == null) {
       return 'destroyed'
@@ -82,7 +82,7 @@ Stateable.prototype.destroy = function() {
     this.finalize.apply(this, arguments)
   } finally {
     this.changeObjectState(OBJECT_STATES.destroyed)
-    if (this.removeAllListeners) this.removeAllListeners()
+    if (this.removeAllListeners) {this.removeAllListeners()}
   }
   return this
 }
