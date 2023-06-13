@@ -57,29 +57,23 @@ defineProperty(Stateable.prototype, 'initialize', function() {
     if (!Stateable.prototype.init) {
       Stateable.prototype.init = (function() {})
     }
-    return self.init.apply(this, arguments)
+    return self.init.apply(self, arguments)
   }
 })
 
-// Stateable.prototype.initialize = function() {
-//   if (isFunction(this.init)) {
-//     console.error('init method is deprecated, pls use initialize instead')
-//     if (!Stateable.prototype.init) {
-//       Stateable.prototype.init = (function() {})
-//     }
-//     return this.init.apply(this, arguments)
-//   }
-// }
+defineProperty(Stateable.prototype, 'finalize', function() {
+  const self = this.self || this
 
-Stateable.prototype.finalize = function() {
-  if (isFunction(this.final)) {
+  if (isFunction(this.super)) {
+    return this.super.apply(self, arguments)
+  } else if (isFunction(self.final)) {
     console.error('final method is deprecated, pls use finalize instead');
     if (!Stateable.prototype.final) {
       Stateable.prototype.final = (function() {})
     }
-    return this.final.apply(this, arguments)
+    return self.final.apply(self, arguments)
   }
-}
+})
 
 Stateable.prototype._constructor = function() {
   defineProperty(this, '_objectState_', null)
