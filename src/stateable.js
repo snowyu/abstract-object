@@ -48,15 +48,28 @@ Stateable.prototype.changeObjectState = function(value) {
   this._objectState_ = value
 }
 
-Stateable.prototype.initialize = function() {
-  if (isFunction(this.init)) {
+defineProperty(Stateable.prototype, 'initialize', function() {
+  const self = this.self || this
+  if (isFunction(this.super)) {
+    return this.super.apply(self, arguments)
+  } else if (isFunction(self.init)) {
     console.error('init method is deprecated, pls use initialize instead')
     if (!Stateable.prototype.init) {
       Stateable.prototype.init = (function() {})
     }
-    return this.init.apply(this, arguments)
+    return self.init.apply(this, arguments)
   }
-}
+})
+
+// Stateable.prototype.initialize = function() {
+//   if (isFunction(this.init)) {
+//     console.error('init method is deprecated, pls use initialize instead')
+//     if (!Stateable.prototype.init) {
+//       Stateable.prototype.init = (function() {})
+//     }
+//     return this.init.apply(this, arguments)
+//   }
+// }
 
 Stateable.prototype.finalize = function() {
   if (isFunction(this.final)) {
