@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "custom-ability": "^2.0.0-alpha.4",
-    "events-ex": "^2.0.0-alpha.1",
+    "events-ex": "^2.0.0-alpha.2",
     "inherits-ex": "^2.1.0-alpha.11",
     "util-ex": "^2.0.0-alpha.8"
   },
