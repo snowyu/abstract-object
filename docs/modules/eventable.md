@@ -37,4 +37,4 @@ Renames and re-exports [eventable](eventable.md#eventable)
 
 #### Defined in
 
-[src/eventable.js:18](https://github.com/snowyu/abstract-object/blob/4c81a76/src/eventable.js#L18)
+[src/eventable.js:18](https://github.com/snowyu/abstract-object/blob/ceeb1c3/src/eventable.js#L18)

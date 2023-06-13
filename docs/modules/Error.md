@@ -20,4 +20,4 @@
 
 #### Defined in
 
-[src/Error.js:2](https://github.com/snowyu/abstract-object/blob/4c81a76/src/Error.js#L2)
+[src/Error.js:2](https://github.com/snowyu/abstract-object/blob/ceeb1c3/src/Error.js#L2)

@@ -10,10 +10,16 @@ The derived class should overwrite the `initialize` and `finalize` methods.
 
 add the Object State Supports and `free` method to your class directly.
 
+You must call the `_constructor` of the state-able ability in the constructor method.
+
 ```js
 import {stateable} from 'abstract-object'
 
-export class MyStateObject {}
+export class MyStateObject {
+  constructor() {
+    this._constructor.apply(this, arguments)
+  }
+}
 stateable(MyStateObject)
 
 export default MyStateObject
@@ -26,7 +32,11 @@ Let state-able object supports the event.
 import {stateable} from 'abstract-object'
 import {eventable} from 'events-ex'
 
-class MyObject {}
+class MyObject {
+  constructor() {
+    this._constructor.apply(this, arguments)
+  }
+}
 stateable(MyObject)
 eventable(MyObject)
 ```
