@@ -1,8 +1,7 @@
 import {extend, isArray, isFunction, isUndefined} from 'util-ex'
 import {OBJECT_STATES_STR} from './stateable'
 
-// eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-export const MAX_LISTENERS = 2e308
+export const MAX_LISTENERS = Number.MAX_SAFE_INTEGER
 
 /*
  * eventable your class, add the following methods and event to your class
