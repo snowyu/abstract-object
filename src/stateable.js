@@ -2,7 +2,7 @@ import {AdditionalInjectionMode, createAbilityInjector} from 'custom-ability'
 import {createObject, createObjectWith} from 'inherits-ex'
 import {defineProperty, isFunction} from 'util-ex'
 
-import additionalOptions from './eventable-options'
+import eventableOptions from './eventable-options'
 
 export const OBJECT_STATES = {
   initing: 1,
@@ -106,7 +106,7 @@ const stateableOptions = {
   depends: {
     Eventable: {
       mode: AdditionalInjectionMode.target,
-      getOpts: additionalOptions,
+      getOpts: eventableOptions,
     }
   }
 }
