@@ -1,4 +1,4 @@
-import {abilitiesSym, createAbilityInjector} from 'custom-ability'
+import {AdditionalInjectionMode, createAbilityInjector} from 'custom-ability'
 import {createObject, createObjectWith} from 'inherits-ex'
 import {defineProperty, isFunction} from 'util-ex'
 
@@ -95,15 +95,15 @@ Stateable.create = createObject
 
 Stateable.createWith = createObjectWith
 
-const _stateable = createAbilityInjector(Stateable, 'objectState')
-
-export function stateable(TargetClass) {
-  _stateable.apply(this, arguments)
-  const $abilities = TargetClass.prototype[abilitiesSym]
-  if (!$abilities.Eventable) {
-    $abilities.Eventable = additionalOptions
+const stateableOptions = {
+  depends: {
+    Eventable: {
+      mode: AdditionalInjectionMode.target,
+      getOpts: additionalOptions,
+    }
   }
-
 }
+
+export const stateable = createAbilityInjector(Stateable, 'objectState', stateableOptions)
 
 export default stateable
