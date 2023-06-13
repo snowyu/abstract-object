@@ -4,6 +4,17 @@ import {OBJECT_STATES_STR} from './stateable'
 // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
 export const MAX_LISTENERS = 2e308
 
+/*
+ * eventable your class, add the following methods and event to your class
+ * * Methods:
+ *   * dispatch(event, args[, callback])
+ *   * dispatchError(error[, callback])
+ * * Events:
+ *   * initing: emit before the init method
+ *   * inited: emit after the init method
+ *   * destroying: emit before the final method
+ *   * destroyed: emit after the final method
+ */
 export function eventableOptions(aOptions) {
   const result = {methods: {}, required: ['setMaxListeners', 'emit']}
 
