@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0-alpha.2](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.1...v3.0.0-alpha.2) (2023-06-13)
+
+
+### Bug Fixes
+
+* **EventableObject:** forget to call _constructor ([37f83cf](https://github.com/snowyu/abstract-object/commit/37f83cffa169453eb092169e8a905f238c034388))
+
+
+### Refactor
+
+* remove deprecated file ([875bcd7](https://github.com/snowyu/abstract-object/commit/875bcd7277c694a8c07d6db2eb3c726a1ce138c0))
+* **stateable:** make finalize method as non-enumerable ([d3f80fa](https://github.com/snowyu/abstract-object/commit/d3f80fa3b787920d17a67965a11afe274842f2ad))
+
 ## [3.0.0-alpha.1](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.0...v3.0.0-alpha.1) (2023-06-13)
 
 
