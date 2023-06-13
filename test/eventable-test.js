@@ -8,7 +8,6 @@ const should = chai.should();
 import {inherits} from 'inherits-ex'
 import log from 'util-ex/lib/log'
 import createObject from 'inherits-ex/lib/createObject'
-// import {eventable} from '../src/eventable'
 import {eventable} from 'events-ex'
 
 
