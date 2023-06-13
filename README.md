@@ -1,65 +1,35 @@
-### AbtractObject [![Build Status](https://img.shields.io/travis/snowyu/abstract-object/master.png)](http://travis-ci.org/snowyu/abstract-object) [![npm](https://img.shields.io/npm/v/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![downloads](https://img.shields.io/npm/dm/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![license](https://img.shields.io/npm/l/abstract-object.svg)](https://npmjs.org/package/abstract-object)
+# AbtractObject [![Build Status](https://img.shields.io/travis/snowyu/abstract-object/master.png)](http://travis-ci.org/snowyu/abstract-object) [![npm](https://img.shields.io/npm/v/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![downloads](https://img.shields.io/npm/dm/abstract-object.svg)](https://npmjs.org/package/abstract-object) [![license](https://img.shields.io/npm/l/abstract-object.svg)](https://npmjs.org/package/abstract-object)
 
 AbstractObject with Object State Supports and `free` method provides.
 
 The derived class should overwrite the `initialize` and `finalize` methods.
 
-
-# Changes
-
-## V2.1.x
-
-+ add the state-able ability to any class.
-- **<broken change>** move RefObject to [ref-object](https://github.com/snowyu/ref-object.js)
-* decoupled the abstract-object completely.
-* All parts can be used individually.
-  * stateable = require('abstract-object/ability')
-  * eventable = require('events-ex/eventable')
-  * refCountable = require('ref-object/ability')
-
-## V2.x
-
-* **<broken change>** separate eventable from AbstractObject
-  + the new EventableObject can be as AbstractObject@v1.x
-* **<broken change>** separate eventable from RefObject too
-  + the new EventableRefObject can be as RefObject@v1.x
-+ add the eventable function to eventable any class('abstract-object/eventable').
-  * use the eventable plugin([events-ex](https://github.com/snowyu/events-ex.js)) to implement eventable object.
-- move all util functions to [util-ex](https://github.com/snowyu/util-ex.js)
-- move enhanced inheritance Functions to [inherits-ex](https://github.com/snowyu/inherits-ex.js).
-- move AbstractError to [abstract-error](https://github.com/snowyu/abstract-error.js)
-
-## V1.x
-
-* AbstractObject inherits from EventEmitter.
-* RefObject inherits from AbstractObject
-* AbstractError
-
-# State-able Ability(V2.1.x)
+## State-able Ability
 
 add the Object State Supports and `free` method to your class directly.
 
-```coffee
-stateable = require 'abstract-object/ability'
+```js
+import {stateable} from 'abstract-object'
 
-module.exports = class AbstractObject
-  stateable AbstractObject
+export class MyStateObject {}
+stateable(MyStateObject)
+
+export default MyStateObject
 
 ```
 
-**Note**: the eventable ability must be after the stateable. like this:
+Let state-able object supports the event.
 
-```coffee
+```js
+import {stateable} from 'abstract-object'
+import {eventable} from 'events-ex'
 
-stateable = require 'abstract-object/ability'
-eventable = require 'events-ex/ability'
-
-class MyObject
-  stateable MyObject
-  eventable MyObject # MUST BE after stateable
+class MyObject {}
+stateable(MyObject)
+eventable(MyObject)
 ```
 
-# AbstractObject
+## AbstractObject
 
 * Methods:
   * `create`(class, ...): the `create` class method uses to create a new object instance(the util.createObject is the same function).
@@ -84,7 +54,7 @@ class MyObject
     * to test object state
 
 
-* only for EventableObject:
+* only added/injected [eventable ability](https://github.com/snowyu/events-ex.js):
   * Methods:
     * `dispatch`(event, args[, callback]): dispath an event or callback
       * `event`: the event name
@@ -99,10 +69,27 @@ class MyObject
     * `'destroying'`: emit before the finalize method
     * `'destroyed'`: emit after the finalize method
 
+## Usage
 
-# RefObject
+```js
+import {AbstractObject} from 'abstract-object'
 
-RefObject has moved to [ref-object](https://github.com/snowyu/ref-object.js)
+class MyObject extends AbstractObject {
+  initialize(a, b) {
+    this.a = a
+    this.b = b
+    this.cache = {}
+  }
+  finalize() {
+    this.cache = null
+  }
+}
+const myObj = new MyObject(1, 2)
+```
+
+## RefObject
+
+RefObject has been moved to [ref-object](https://github.com/snowyu/ref-object.js)
 
 The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddRef/Release` Supports.
 
@@ -112,85 +99,45 @@ The `RefObject` is derived from AbstractObject. and add the `RefCount` and `AddR
   * `addRef()`: Increments the reference count for this instance
     and returns the new reference count.
 
+## AbstractError Classes
 
-# Usage:
-
-```coffee
-AbstractObject = require('abstract-object')
-inherits = require('inherits-ex')
-createObject = AbstractObject.create
-#or createObject = require('inherits-ex/lib/createObject')
-
-class MyObject
-  inherits MyObject, AbstractObject
-  initialize: (@a, @b)->
-    @cache = {}
-  finalize: ->
-    @cache = null
-
-myObj = createObject(MyObject, 1, 2)
-
-# if you do not wanna use `AbstractObject.create`, you MUST remember this:
-# even the constructor is empty, you should call the parent's constructor manually.
-# myObj = new MyObject()
-
-class MyObject
-  inherits MyObject, RefObject
-  constructor: ->
-    # must call super method here:
-    super
-  initialize: (@a,@b)->
-    @cache = {}
-  finalize: ->
-    @cache = null
-
-```
-
-the javascript:
-
-```js
-
-var AbstractObject = require('abstract-object')
-var RefObject = require('ref-object')
-var inherits = require('inherits-ex')
-var createObject = AbstractObject.create
-//or var createObject = require('inherits-ex/lib/createObject')
-
-//if you do not wanna to use the 'AbstractObject.create'(createObject):
-var MyObject = function() {
-  //super call
-  MyObject.__super__.constructor.apply(this, arguments);
-}
-// or, this MUST use the 'AbstractObject.create'(createObject)
-var MyObject = function(){}
+It has been moved to [abstract-error](https://github.com/snowyu/abstract-error.js).
 
 
-inherits(MyObject, RefObject)
+## Changes
+
+### V3.x
+
+* **broken change** Remove deprecated `ref-object.js` , `RefObject.js` and `eventable-ref-object.js` files
+  * these files are now part of the [ref-object](https://github.com/snowyu/ref-object.js).
+* **broken change** Remove deprecated `util` to [util-ex](https://github.com/snowyu/util-ex.js) package.
+* **broken change** Remove deprecated `Error` to [abstract-error](https://github.com/snowyu/abstract-error.js) package.
 
 
-MyObject.prototype.initialize = function(a,b) {
-  this.a = a
-  this.b = b
-  this.cache = {}
-}
+### V2.1.x
 
-MyObject.prototype.finalize = function() {
-  this.cache = null
-}
++ add the state-able ability to any class.
+- **<broken change>** move RefObject to [ref-object](https://github.com/snowyu/ref-object.js)
+* decoupled the abstract-object completely.
+* All parts can be used individually.
+  * stateable = require('abstract-object/ability')
+  * eventable = require('events-ex/eventable')
+  * refCountable = require('ref-object/ability')
 
-var myObj = createObject(MyObject, 1, 2)
-//or this,  must overwrite the constructor and call the super constructor.
-var myObj = new MyObject(1,2)
-```
+### V2.x
 
-# AbstractError Classes
+* **<broken change>** separate eventable from AbstractObject
+  + the new EventableObject can be as AbstractObject@v1.x
+* **<broken change>** separate eventable from RefObject too
+  + the new EventableRefObject can be as RefObject@v1.x
++ add the eventable function to eventable any class('abstract-object/eventable').
+  * use the eventable plugin([events-ex](https://github.com/snowyu/events-ex.js)) to implement eventable object.
+- move all util functions to [util-ex](https://github.com/snowyu/util-ex.js)
+- move enhanced inheritance Functions to [inherits-ex](https://github.com/snowyu/inherits-ex.js).
+- move AbstractError to [abstract-error](https://github.com/snowyu/abstract-error.js)
 
-It has moved to [abstract-error](https://github.com/snowyu/abstract-error.js).
+### V1.x
 
-# Enhanced Inheritance Functions
-
-Moved to [inherits-ex](https://github.com/snowyu/inherits-ex.js).
-
-# Util Functions
-
-Moved to [util-ex](https://github.com/snowyu/util-ex.js).
+* AbstractObject inherits from EventEmitter.
+* RefObject inherits from AbstractObject
+* AbstractError
