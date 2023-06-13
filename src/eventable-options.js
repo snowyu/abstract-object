@@ -1,23 +1,24 @@
 import {extend, isArray, isFunction, isUndefined} from 'util-ex'
-import {AdditionalInjectionType} from 'custom-ability'
 import {OBJECT_STATES_STR} from './stateable'
 
 export let MAX_LISTENERS = 2e308
 
 export function eventableOptions(aOptions) {
-  if (!aOptions) {
-    aOptions = {}
-  }
-  if (!aOptions.methods) {
-    aOptions.methods = {}
-  }
+  const result = {methods: {}, required: ['setMaxListeners', 'emit']}
 
-  aOptions.type = AdditionalInjectionType.direct
-  aOptions.id = 'stateable'
+  // let vIncludes = aOptions.include
+  // if (!vIncludes) {vIncludes = aOptions.include = []}
+  // if (!Array.isArray(vIncludes)) {aOptions.include = vIncludes = [vIncludes]}
+  // ['setMaxListeners', 'emit'].forEach(function(item) {
+  //   if (vIncludes.indexOf(item) === -1) {vIncludes.push(item)}
+  // })
 
-  const maxListeners = aOptions.maxListeners || MAX_LISTENERS
+  // aOptions.type = AdditionalInjectionType.direct
+  // aOptions.id = 'stateable'
 
-  extend(aOptions.methods, {
+  const maxListeners = (aOptions && aOptions.maxListeners) || MAX_LISTENERS
+
+  extend(result.methods, {
     initialize() {
       const self = this.self
       self.setMaxListeners(maxListeners)
@@ -67,7 +68,7 @@ export function eventableOptions(aOptions) {
       return this.emit('error', error)
     }
   })
-  return aOptions
+  return result
 }
 
 export default eventableOptions
