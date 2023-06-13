@@ -1,4 +1,4 @@
-import eventable from './eventable'
+import {eventable} from 'events-ex'
 import stateable from './stateable'
 
 export function EventableObject() {
