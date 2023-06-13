@@ -1,1 +1,1 @@
-module.exports = require('./lib/ability')
+module.exports = require('./lib/stateable')
