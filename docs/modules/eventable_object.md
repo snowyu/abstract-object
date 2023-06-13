@@ -36,4 +36,4 @@ Renames and re-exports [EventableObject](eventable_object.md#eventableobject)
 
 #### Defined in
 
-[src/eventable-object.js:4](https://github.com/snowyu/abstract-object/blob/ceeb1c3/src/eventable-object.js#L4)
+[src/eventable-object.js:4](https://github.com/snowyu/abstract-object/blob/5cbd886/src/eventable-object.js#L4)
