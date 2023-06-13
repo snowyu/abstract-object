@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0-alpha.1](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.0...v3.0.0-alpha.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* the initialize method should be overloading ([ceeb1c3](https://github.com/snowyu/abstract-object/commit/ceeb1c31660ef4cab7e82bef60b6cbe830171a80))
+
 ## [3.0.0-alpha.0](https://github.com/snowyu/abstract-object/compare/v2.1.9...v3.0.0-alpha.0) (2023-06-13)
 
 
