@@ -1,3 +1,4 @@
+// @sourceType: module
 export * from './stateable'
 export * from './abstract-object'
 export * from './eventable-options'

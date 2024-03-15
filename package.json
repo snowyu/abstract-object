@@ -5,7 +5,6 @@
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./lib/index.js",
   "module": "./src/index.js",
-  "type": "commonjs",
   "files": [
     "README.md",
     "LICENSE-MIT",
@@ -32,10 +31,10 @@
     "test": "mocha"
   },
   "dependencies": {
-    "custom-ability": "^2.0.0-alpha.4",
-    "events-ex": "^2.0.0-alpha.2",
-    "inherits-ex": "^2.1.0-alpha.11",
-    "util-ex": "^2.0.0-alpha.8"
+    "custom-ability": "^2.0.0-alpha.6",
+    "events-ex": "^2.0.0-alpha.6",
+    "inherits-ex": "^2.1.0-alpha.12",
+    "util-ex": "^2.0.0-alpha.10"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.4",
