@@ -36,4 +36,4 @@ Renames and re-exports [AbstractObject](abstract_object.md#abstractobject)
 
 #### Defined in
 
-[src/abstract-object.js:3](https://github.com/snowyu/abstract-object/blob/5647f42/src/abstract-object.js#L3)
+[src/abstract-object.js:3](https://github.com/snowyu/abstract-object/blob/a10e79f/src/abstract-object.js#L3)
