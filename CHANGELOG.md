@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0-alpha.4](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-03-15)
+
+
+### Bug Fixes
+
+* webpack5 Module parse failed: 'import' and 'export' may appear only with 'sourceType: module' ([a10e79f](https://github.com/snowyu/abstract-object/commit/a10e79f3a7891f00c015a6b3009468204768e1fa))
+
 ## [3.0.0-alpha.3](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.2...v3.0.0-alpha.3) (2023-06-13)
 
 

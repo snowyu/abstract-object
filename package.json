@@ -1,6 +1,6 @@
 {
   "name": "abstract-object",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0-alpha.4",
   "description": "AbstractObject with Object State Events Support",
   "homepage": "https://github.com/snowyu/abstract-object",
   "main": "./lib/index.js",
