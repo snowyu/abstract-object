@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.0.0](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.4...v3.0.0) (2024-08-29)
+
 ## [3.0.0-alpha.4](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-03-15)
 
 
