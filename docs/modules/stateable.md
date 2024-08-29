@@ -40,7 +40,7 @@ Renames and re-exports [stateable](stateable.md#stateable)
 
 #### Defined in
 
-[src/stateable.js:7](https://github.com/snowyu/abstract-object/blob/a10e79f/src/stateable.js#L7)
+[src/stateable.js:7](https://github.com/snowyu/abstract-object/blob/f49cbc0/src/stateable.js#L7)
 
 ___
 
@@ -50,32 +50,25 @@ ___
 
 #### Defined in
 
-[src/stateable.js:14](https://github.com/snowyu/abstract-object/blob/a10e79f/src/stateable.js#L14)
+[src/stateable.js:14](https://github.com/snowyu/abstract-object/blob/f49cbc0/src/stateable.js#L14)
 
 ## Functions
 
 ### stateable
 
-▸ **stateable**(`targetClass`, `options?`): `Function`
-
-A function that adds(injects) the ability of a specified ability class to a target class.
-
-Note: Maybe the ability will be injected into the inheritance class.
+▸ **stateable**(`targetClass?`, `options?`): `Function`
 
 #### Parameters
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `targetClass` | `Function` | The target class to which the ability will be added. |
-| `options?` | `AbilityOptions` | An optional ability configuration object. |
+| Name | Type |
+| :------ | :------ |
+| `targetClass?` | `Function` |
+| `options?` | `AbilityOptions` |
 
 #### Returns
 
 `Function`
 
-- An injected target class that takes a class and adds the ability to it using the specified
-                      options.
-
 #### Defined in
 
-node_modules/custom-ability/lib/custom-ability.d.ts:103
+node_modules/custom-ability/lib/custom-ability.d.ts:28
