@@ -9,6 +9,7 @@
       "declaration": true,
       "esModuleInterop": true,
       "module": "CommonJS",
+      "lib": ["ES2018"],
       "target": "ES6",
         // This compiler run should
       // only output d.ts files
