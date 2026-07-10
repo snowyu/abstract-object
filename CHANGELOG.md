@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.1.0](https://github.com/snowyu/abstract-object/compare/v3.0.0...v3.1.0) (2026-07-10)
+
+
+### Features
+
+* add ability ref ([c4a91a1](https://github.com/snowyu/abstract-object/commit/c4a91a193a6cf7c6b87afe40f6794d147949d9cf))
+
+
+### Refactor
+
+* **build:** use the tsup and vitest and following .mjs spec in cjs module ([4cb0150](https://github.com/snowyu/abstract-object/commit/4cb015060b37f4966fdb8f6f713bba47ec94aec5))
+
 ## [3.0.0](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.4...v3.0.0) (2024-08-29)
 
 ## [3.0.0-alpha.4](https://github.com/snowyu/abstract-object/compare/v3.0.0-alpha.3...v3.0.0-alpha.4) (2024-03-15)
