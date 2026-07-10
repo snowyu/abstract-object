@@ -1,10 +1,4 @@
-import chai from 'chai'
-import sinon from 'sinon'
-import sinonChai from 'sinon-chai'
-
-const should = chai.should();
-const expect = chai.expect;
-chai.use(sinonChai);
+import {describe, it, expect, vi} from 'vitest'
 
 import inherits from 'inherits-ex/lib/inherits'
 
@@ -22,52 +16,56 @@ describe("AbstractObject", function() {
 
     inherits(TestObject, AbstractObject);
 
-    TestObject.prototype.should.have.property('Class', TestObject);
+    expect(TestObject.prototype).to.have.property('Class', TestObject);
   });
 
   describe("Object State methods", function() {
-    it('.isIniting()', function(done) {
-      class TestObject extends AbstractObject {
-        initialize() {
-          this.isIniting().should.be["true"];
-          done();
+    it('.isIniting()', function() {
+      return new Promise((resolve) => {
+        class TestObject extends AbstractObject {
+          initialize() {
+            expect(this.isIniting()).to.be.true;
+            resolve();
+          }
         }
-      }
-      const obj = AbstractObject.create(TestObject);
+        const obj = AbstractObject.create(TestObject);
+      });
     });
     it('.isInited()', function() {
       class TestObject extends AbstractObject {}
 
       const obj = AbstractObject.create(TestObject);
-      obj.isInited().should.be["true"];
+      expect(obj.isInited()).to.be.true;
     });
 
-    it('.isDestroying()', function(done) {
-      class TestObject extends AbstractObject {
-        finalize() {
-          this.isDestroying().should.be["true"];
-          return done();
+    it('.isDestroying()', function() {
+      return new Promise((resolve) => {
+        class TestObject extends AbstractObject {
+          finalize() {
+            expect(this.isDestroying()).to.be.true;
+            resolve();
+          }
         }
-      }
 
-      const obj = new TestObject;
-      obj.isInited().should.be["true"];
-      obj.free();
+        const obj = new TestObject;
+        expect(obj.isInited()).to.be.true;
+        obj.free();
+      });
     });
     it('.isDestroyed()', function() {
       class TestObject extends AbstractObject {}
 
       const obj = AbstractObject.create(TestObject);
-      obj.isInited().should.be["true"];
+      expect(obj.isInited()).to.be.true;
       obj.free();
-      obj.isDestroyed().should.be["true"];
+      expect(obj.isDestroyed()).to.be.true;
     });
   });
   describe("finalization method", function() {
     it('should pass options to final method when free(options)', function() {
       class TestObject extends AbstractObject {}
 
-      TestObject.prototype.finalize = sinon.spy();
+      TestObject.prototype.finalize = vi.fn();
 
       const obj = AbstractObject.create(TestObject);
       const opts = {
@@ -75,22 +73,24 @@ describe("AbstractObject", function() {
         a: 2
       };
       obj.free(opts, 32);
-      obj.finalize.should.be.calledWith(opts, 32);
+      expect(obj.finalize).toHaveBeenCalledWith(opts, 32);
     });
   });
   describe("initialization method", function() {
-    it('should pass the arguments into the initialization method', function(done) {
-      class TestObject extends AbstractObject {
-        initialize() {
-          arguments.should.have.length(3);
-          arguments.should.have.property('0', 'abc');
-          arguments.should.have.property('1', '321');
-          arguments.should.have.property('2', 456);
-          done();
+    it('should pass the arguments into the initialization method', function() {
+      return new Promise((resolve) => {
+        class TestObject extends AbstractObject {
+          initialize() {
+            expect(arguments).to.have.length(3);
+            expect(arguments).to.have.property('0', 'abc');
+            expect(arguments).to.have.property('1', '321');
+            expect(arguments).to.have.property('2', 456);
+            resolve();
+          }
         }
-      }
 
-      const obj = new TestObject('abc', '321', 456);
+        const obj = new TestObject('abc', '321', 456);
+      });
     });
     it('should pass the correct arguments to init', function() {
       class TestObject extends AbstractObject {}
@@ -99,17 +99,17 @@ describe("AbstractObject", function() {
           this.first = first;
           this.second = second;
           this.third = third;
-          arguments.should.have.length(3);
-          arguments.should.have.property('0', 'abc');
-          arguments.should.have.property('1', '321');
-          arguments.should.have.property('2', 456);
+          expect(arguments).to.have.length(3);
+          expect(arguments).to.have.property('0', 'abc');
+          expect(arguments).to.have.property('1', '321');
+          expect(arguments).to.have.property('2', 456);
         }
       }
 
       const obj = new A2('abc', '321', 456);
-      obj.should.have.property('first', 'abc');
-      obj.should.have.property('second', '321');
-      obj.should.have.property('third', 456);
+      expect(obj).to.have.property('first', 'abc');
+      expect(obj).to.have.property('second', '321');
+      expect(obj).to.have.property('third', 456);
     });
   });
 });

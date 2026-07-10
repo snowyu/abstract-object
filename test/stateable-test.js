@@ -1,10 +1,4 @@
-import chai from 'chai'
-import sinon from 'sinon'
-import sinonChai from 'sinon-chai'
-
-const should = chai.should();
-const expect = chai.expect;
-chai.use(sinonChai);
+import {describe, it, expect} from 'vitest'
 
 import {inherits} from 'inherits-ex'
 
