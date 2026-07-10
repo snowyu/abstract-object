@@ -30,7 +30,7 @@ Renames and re-exports [eventableOptions](eventable_options.md#eventableoptions)
 
 #### Defined in
 
-[src/eventable-options.js:4](https://github.com/snowyu/abstract-object/blob/f49cbc0/src/eventable-options.js#L4)
+[src/eventable-options.js:4](https://github.com/snowyu/abstract-object/blob/4cb0150/src/eventable-options.js#L4)
 
 ## Functions
 
@@ -55,4 +55,4 @@ Renames and re-exports [eventableOptions](eventable_options.md#eventableoptions)
 
 #### Defined in
 
-[src/eventable-options.js:17](https://github.com/snowyu/abstract-object/blob/f49cbc0/src/eventable-options.js#L17)
+[src/eventable-options.js:17](https://github.com/snowyu/abstract-object/blob/4cb0150/src/eventable-options.js#L17)

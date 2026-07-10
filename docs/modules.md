@@ -8,6 +8,7 @@
 
 - [Error](modules/Error.md)
 - [Object](modules/Object.md)
+- [ability](modules/ability.md)
 - [abstract-object](modules/abstract_object.md)
 - [eventable-object](modules/eventable_object.md)
 - [eventable-options](modules/eventable_options.md)

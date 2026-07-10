@@ -40,7 +40,7 @@ Renames and re-exports [stateable](stateable.md#stateable)
 
 #### Defined in
 
-[src/stateable.js:7](https://github.com/snowyu/abstract-object/blob/f49cbc0/src/stateable.js#L7)
+[src/stateable.js:7](https://github.com/snowyu/abstract-object/blob/4cb0150/src/stateable.js#L7)
 
 ___
 
@@ -50,25 +50,31 @@ ___
 
 #### Defined in
 
-[src/stateable.js:14](https://github.com/snowyu/abstract-object/blob/f49cbc0/src/stateable.js#L14)
+[src/stateable.js:14](https://github.com/snowyu/abstract-object/blob/4cb0150/src/stateable.js#L14)
 
 ## Functions
 
 ### stateable
 
-▸ **stateable**(`targetClass?`, `options?`): `Function`
+▸ **stateable**<`T`\>(`targetClass?`, `options?`): `EnhancedClass`<`T`, typeof `Stateable`\>
+
+#### Type parameters
+
+| Name | Type |
+| :------ | :------ |
+| `T` | extends `ClassEx` |
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `targetClass?` | `Function` |
+| `targetClass?` | `T` |
 | `options?` | `AbilityOptions` |
 
 #### Returns
 
-`Function`
+`EnhancedClass`<`T`, typeof `Stateable`\>
 
 #### Defined in
 
-node_modules/custom-ability/lib/custom-ability.d.ts:28
+node_modules/custom-ability/lib/index.d.ts:33
